@@ -1,5 +1,12 @@
 useDynLib("rmutil")
 
+  importFrom("graphics", "lines", "par", "plot", "points")
+  importFrom("stats", "as.formula", "deriv", "dgamma", "dnorm",
+             "dweibull", "fitted", "model.frame", "model.matrix",
+             "model.response", "pgamma", "pnorm", "pweibull", "qgamma",
+             "qnbinom", "qnorm", "qweibull", "residuals", "runif",
+             "terms", "uniroot")
+  importFrom("utils", "read.table")
 
 S3method(as.data.frame, repeated) 
 S3method(as.data.frame, response)
