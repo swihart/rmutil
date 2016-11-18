@@ -55,6 +55,7 @@ covariate and, possibly, those in \code{oldtvcov}.
 \code{\link[rmutil]{tvctomat}}.
 }
 \examples{
+\dontrun{
 y <- matrix(rnorm(20), ncol=5)
 resp <- restovec(y, times=c(1,3,6,10,15))
 z <- matrix(rpois(20,5),ncol=5)
@@ -67,5 +68,6 @@ z2 <- matrix(rpois(20,5),ncol=5)
 z2
 newtvc2 <- gettvc(resp, tvcov=z2, tvctimes=c(0,4,5,12,16), oldtvc=newtvc)
 covariates(newtvc2)
+}
 }
 \keyword{manip}
