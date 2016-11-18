@@ -1,6 +1,6 @@
 changes.txt
 \.fsrc$
-\.o$
+^.*\.o$
 \.so$
 \.dll$
 ^.*\.Rproj$
