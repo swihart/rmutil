@@ -1,11 +1,11 @@
 \name{mprofile}
 \title{Produce Marginal Time Profiles for Plotting}
 \usage{
-zz <- mprofile(z, times=NULL, mu=NULL, ccov, plotse=TRUE)
-plot(zz, nind=1, intensity=FALSE, add=FALSE, ylim=c(min(z$pred),max(z$pred)),
-	lty=NULL, ylab="Fitted value", xlab="Time", ...)
+\method{plot}{mprofile}(x, nind=1, intensity=FALSE, add=FALSE, ylim=range(z$pred, na.rm = TRUE),
+	lty=NULL, ylab=NULL, xlab=NULL, ...)
 }
 \alias{mprofile}
+\alias{mprofile.default}
 \alias{plot.mprofile}
 \description{
 \code{mprofile} is used for plotting marginal profiles over time
@@ -17,25 +17,26 @@ See \code{\link[rmutil]{iprofile}} for plotting individual profiles from
 recursive fitted values.
 }
 \arguments{
-\item{z}{An object of class \code{recursive}, from \code{\link[growth]{carma}},
-\code{\link[growth]{elliptic}}, \code{\link[repeated]{gar}},
-\code{\link[repeated]{kalcount}}, \code{\link[repeated]{kalseries}},
-\code{\link[event]{kalsurv}}, or \code{\link[repeated]{nbkal}}.}
-\item{zz}{An object of class \code{mprofile}/}
-\item{times}{Vector of time points at which profiles are to be plotted.}
-\item{mu}{The location regression as a function of the parameters and
-the times for the desired covariate values.}
-\item{ccov}{Covariate values for the profiles (\code{\link[growth]{carma}}
-only).}
-\item{plotse}{If TRUE, plot standard errors
-(\code{\link[growth]{carma}} only).}
+\item{x}{An object of class \code{mprofile}, e.g. \code{x = mprofile(z, times=NULL, mu=NULL, ccov, plotse=TRUE)}, where \code{z}An object of class \code{recursive}, from \code{carma},
+\code{elliptic}, \code{gar},
+\code{kalcount}, \code{kalseries},
+\code{kalsurv}, or \code{nbkal}; 
+\code{times} is a vector of time points at which profiles are to be plotted;
+\code{mu} is the location regression as a function of the parameters and
+the times for the desired covariate values;
+\code{ccov} is covariate values for the profiles (\code{carma}
+only); and 
+\code{plotse} when TRUE plots standard errors
+(\code{carma} only).}
 \item{nind}{Observation number(s) of individual(s) to be plotted. (Not
 used if \code{mu} is supplied.)}
 \item{intensity}{If TRUE, the intensity is plotted instead of the time
-between events. Only for models produced by \code{\link[event]{kalsurv}}.}
+between events. Only for models produced by \code{kalsurv}.}
 \item{add}{If TRUE, add contour to previous plot instead of creating a
 new one.}
-\item{others}{Plotting control options.}
+%\item{others}{Plotting control options.}
+\item{lty,ylim,xlab,ylab}{ See base plot.}
+\item{...}{Arguments passed to other functions.}
 }
 \value{
 \code{mprofile}  returns information ready for plotting by
@@ -43,13 +44,12 @@ new one.}
 }
 \author{J.K. Lindsey}
 \seealso{
-\code{\link[growth]{carma}}, \code{\link[growth]{elliptic}},
-\code{\link[repeated]{gar}}, \code{\link[repeated]{kalcount}},
-\code{\link[repeated]{kalseries}}, \code{\link[event]{kalsurv}},
-\code{\link[repeated]{nbkal}} \code{\link[rmutil]{iprofile}},
+ \code{\link[rmutil]{iprofile}},
 \code{\link[rmutil]{plot.residuals}}.
 }
 \examples{
+\dontrun{
+## try after you get the repeated package
 library(repeated)
 times <- rep(1:20,2)
 dose <- c(rep(2,20),rep(5,20))
@@ -65,5 +65,6 @@ z <- gar(conc, dist="gamma", times=1:20, mu=mu, shape=shape,
 # plot individual profiles and the average profile
 plot(iprofile(z), nind=1:2, pch=c(1,20), lty=3:4)
 plot(mprofile(z), nind=1:2, lty=1:2, add=TRUE)
+}
 }
 \keyword{hplot}

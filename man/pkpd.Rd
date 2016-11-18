@@ -78,6 +78,7 @@ returned.
 }
 \author{J.K. Lindsey}
 \examples{
+\dontrun{
 library(repeated)
 times <- rep(1:20,2)
 dose <- c(rep(2,20),rep(5,20))
@@ -96,5 +97,6 @@ gar(conc, dist="gamma", times=1:20, mu=mu, preg=log(c(1,0.4,0.1)),
 shape <- mu
 gar(conc, dist="gamma", times=1:20, mu=mu, preg=log(c(0.5,0.4,0.1)),
 	pdep=0.1, shape=shape, pshape=log(c(0.5,0.4,0.1)))
+}
 }
 \keyword{models}

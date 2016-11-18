@@ -4,13 +4,11 @@
 dinvgauss(y, m, s, log=FALSE)
 pinvgauss(q, m, s)
 qinvgauss(p, m, s)
-hinvgauss(y, m, s)
 rinvgauss(n, m, s)
 }
 \alias{dinvgauss}
 \alias{pinvgauss}
 \alias{qinvgauss}
-\alias{hinvgauss}
 \alias{rinvgauss}
 \description{
 These functions provide information about the inverse Gaussian

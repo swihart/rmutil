@@ -51,9 +51,6 @@ covariate and, possibly, those in \code{oldtvcov}.
 }
 \author{J.K. Lindsey and D.F. Heitjan}
 \seealso{
-\code{\link[growth]{carma}}, \code{\link[growth]{elliptic}},
-\code{\link[repeated]{gar}}, \code{\link[repeated]{kalcount}},
-\code{\link[repeated]{kalseries}}, \code{\link[event]{kalsurv}},
 \code{\link[rmutil]{read.list}}, \code{\link[rmutil]{restovec}},
 \code{\link[rmutil]{tvctomat}}.
 }

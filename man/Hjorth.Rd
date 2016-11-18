@@ -4,13 +4,11 @@
 dhjorth(y, m, s, f, log=FALSE)
 phjorth(q, m, s, f)
 qhjorth(p, m, s, f)
-hhjorth(y, m, s, f)
 rhjorth(n, m, s, f)
 }
 \alias{dhjorth}
 \alias{phjorth}
 \alias{qhjorth}
-\alias{hhjorth}
 \alias{rhjorth}
 \description{
 These functions provide information about the Hjorth

@@ -4,13 +4,11 @@
 dglogis(y, m=0, s=1, f=1, log=FALSE)
 pglogis(q, m=0, s=1, f=1)
 qglogis(p, m=0, s=1, f=1)
-hglogis(y, m=0, s=1, f=1)
 rglogis(n, m=0, s=1, f=1)
 }
 \alias{dglogis}
 \alias{pglogis}
 \alias{qglogis}
-\alias{hglogis}
 \alias{rglogis}
 \description{
 These functions provide information about the generalized logistic

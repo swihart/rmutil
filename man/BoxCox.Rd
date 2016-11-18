@@ -4,13 +4,11 @@
 dboxcox(y, m, s=1, f=1, log=FALSE)
 pboxcox(q, m, s=1, f=1)
 qboxcox(p, m, s=1, f=1)
-hboxcox(y, m, s=1, f=1)
 rboxcox(n, m, s=1, f=1)
 }
 \alias{dboxcox}
 \alias{pboxcox}
 \alias{qboxcox}
-\alias{hboxcox}
 \alias{rboxcox}
 \description{
 These functions provide information about the Box-Cox

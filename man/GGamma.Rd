@@ -4,13 +4,11 @@
 dggamma(y, s, m, f, log=FALSE)
 pggamma(q, s, m, f)
 qggamma(p, s, m, f)
-hggamma(y, s, m, f)
 rggamma(n, s, m, f)
 }
 \alias{dggamma}
 \alias{pggamma}
 \alias{qggamma}
-\alias{hggamma}
 \alias{rggamma}
 \description{
 These functions provide information about the generalized gamma

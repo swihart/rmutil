@@ -2,7 +2,7 @@
 \title{Read a List of Matrices from a File for Repeated Times to Events}
 \alias{read.surv}
 \usage{
-read.surv(file="", skip=0, nlines=1, cumulative=T, all=T)
+read.surv(file="", skip=0, nlines=1, cumulative=TRUE, all=TRUE)
 }
 \description{
 \code{read.surv} reads sets of lines of data from a file. Each set may

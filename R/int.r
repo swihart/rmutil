@@ -24,9 +24,10 @@
 #  DESCRIPTION
 #
 #    A function to perform vectorized Romberg integration
-
-.First.lib <- function(lib, pkg)
-	library.dynam("rmutil", pkg, lib)
+# Now using LazyLoad: true in DESCRIPTION
+# http://stackoverflow.com/a/4369551/2727349
+#.First.lib <- function(lib, pkg)
+#	library.dynam("rmutil", pkg, lib)
 ###
 ### vectorized one-dimensional integration
 ###
@@ -155,7 +156,7 @@ else {
 		eps=as.double(eps),
 		inf=as.integer(2),
 		quadr=as.double(1),
-		DUP=FALSE,
+		## DUP=FALSE,
 		PACKAGE="rmutil")
 		if(z2$inf==3||z2$inf==4)warning(paste("error",z2$inf,"- integration incomplete - try larger max"))
 		else if(z2$inf>4)stop(paste("error",z2$inf,"- incorrect arguments"))}
@@ -170,7 +171,7 @@ else {
 		eps=as.double(eps),
 		inf=as.integer(inf),
 		quadr=as.double(1),
-		DUP=FALSE,
+		## DUP=FALSE,
 		PACKAGE="rmutil")
 	if(z1$inf==3||z1$inf==4)warning(paste("error",z1$inf,"- integration incomplete - try larger max"))
 	else if(z1$inf>4)stop(paste("error",z1$inf,"- incorrect arguments"))

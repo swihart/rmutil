@@ -53,7 +53,7 @@ if(!is.matrix(x))stop("x must be a matrix")
 if(dim(x)[1]!=dim(x)[2])stop("x must be a square matrix")
 type <- match.arg(type,c("spectral decomposition","series approximation"))
 if(type=="spectral decomposition"){
-	z <- eigen(t*x,sym=FALSE)
+	z <- eigen(t*x,symmetric=FALSE)
 	p <- z$vectors%*%diag(exp(z$values))%*%solve(z$vectors)}
 else {
 	xx <- x*t/2^k
@@ -70,7 +70,7 @@ p}
 "%^%" <- function(x, p){
 if(!is.matrix(x))stop("x must be a matrix")
 if(dim(x)[1]!=dim(x)[2])stop("x must be a square matrix")
-z <- eigen(x,sym=FALSE)
+z <- eigen(x,symmetric=FALSE)
 z$vectors%*%diag(z$values^p)%*%solve(z$vectors)}
 
 #    A function to provide correct constraints about the mean

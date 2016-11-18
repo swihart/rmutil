@@ -4,13 +4,11 @@
 dgweibull(y, s, m, f, log=FALSE)
 pgweibull(q, s, m, f)
 qgweibull(p, s, m, f)
-hgweibull(y, s, m, f)
 rgweibull(n, s, m, f)
 }
 \alias{dgweibull}
 \alias{pgweibull}
 \alias{qgweibull}
-\alias{hgweibull}
 \alias{rgweibull}
 \description{
 These functions provide information about the generalized Weibull

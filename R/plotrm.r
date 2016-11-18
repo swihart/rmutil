@@ -31,7 +31,7 @@
 ###   from dynamic models
 mprofile <- function(z, ...) UseMethod("mprofile")
 
-mprofile.default <- function(z, times=NULL, mu=NULL){
+mprofile.default <- function(z, times=NULL, mu=NULL, ...){
 if(is.null(times)&&is.null(z$response$times)&&!inherits(z,"kalsurv"))
 	stop("No times available")
 if(is.null(mu)||!is.function(mu)){
@@ -67,8 +67,9 @@ invisible(z)}
 
 ### function to plot marginal profiles
 ###
-plot.mprofile <- function(z, nind=1, intensity=FALSE, add=FALSE,
+plot.mprofile <- function(x, nind=1, intensity=FALSE, add=FALSE,
 	ylim=range(z$pred,na.rm=TRUE), lty=NULL, ylab=NULL, xlab=NULL, ...){
+  z <- x; rm(x)
 if(max(nind)>length(nobs(z)))stop("no such individual")
 if(inherits(z,"kalsurv")){
 #
@@ -134,7 +135,7 @@ if(!is.null(z$pse)){
 ###
 iprofile <- function(z, ...) UseMethod("iprofile")
 
-iprofile.default <- function(z, plotsd=FALSE){
+iprofile.default <- function(z, plotsd=FALSE, ...){
 if(is.null(z$response$times)&&!inherits(z,"kalsurv"))stop("No times available")
 if(!inherits(z,"recursive"))
 	stop("The object must have class, recursive")
@@ -180,9 +181,10 @@ invisible(z)}
 
 ### function to plot individual profiles
 ###
-plot.iprofile <- function(z, nind=1, observed=TRUE, intensity=FALSE, add=FALSE,
+plot.iprofile <- function(x, nind=1, observed=TRUE, intensity=FALSE, add=FALSE,
 	lty=NULL, pch=NULL, ylab=NULL, xlab=NULL, main=NULL, ylim=NULL,
 	xlim=NULL, ...){
+  z <- x; rm(x)
 if(max(nind)>length(nobs(z)))stop("no such individual")
 if(inherits(z,"kalsurv")){
 	for(i in 1:length(z$response$y))if(z$response$y[i]==0)
@@ -249,9 +251,11 @@ for(i in nind){
 
 ### function to plot residuals
 ###
-plot.residuals <- function(z, x=NULL, subset=NULL, ccov=NULL,
+plot.residuals <- function(x, X=NULL, subset=NULL, ccov=NULL,
 	nind=NULL, recursive=TRUE, pch=20, ylab="Residual",
 	xlab=NULL, main=NULL, ...){
+  z <- x; rm(x)
+  x <- X; rm(X)
 na <- TRUE
 #
 # check if model produced by a function in one of my libraries

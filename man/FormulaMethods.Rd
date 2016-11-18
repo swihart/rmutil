@@ -1,11 +1,11 @@
 \name{FormulaMethods}
 \title{Methods for formulafn Functions}
 \usage{
-covariates(z)
-formula(z)
-model(z)
-parameters(z)
-print(z)
+\method{covariates}{formulafn}(z, ...)
+\method{formula}{formulafn}(x, ...)
+model(z, ...)
+parameters(z, ...)
+\method{print}{formulafn}(x, ...)
 }
 \alias{covariates.formulafn}
 \alias{formula.formulafn}
@@ -13,6 +13,7 @@ print(z)
 \alias{model.formulafn}
 \alias{parameters}
 \alias{parameters.formulafn}
+\alias{print.formulafn}
 \description{
 Methods for accessing the contents of a function created from formula
 produced by \code{\link[rmutil]{finterp}} or a function modified by
@@ -29,7 +30,9 @@ notation was used.
 \code{parameters}: extract the names of the parameters.
 }
 \arguments{
-\item{z}{A function of class, \code{formulafn}.}
+\item{x,z}{A function of class, \code{formulafn}.}
+\item{...}{Arguments to other functions.}
+
 }
 \value{
 These methods extract information about functions of class, \code{formulafn},

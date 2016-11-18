@@ -1038,9 +1038,13 @@ if(!is.null(interaction)){
 		if(!is.null(ccov)){
 		# if interactions with time-constant covariates
 			if(inherits(ccov,"tccov")){
-				ccov <- ccov$ccov
-				units2 <- ccov$units
-				if(!is.null(units)&&is.null(units2))
+			  ## bruce swihart edit:
+			  ## switch the next two lines to avoid
+			  ## R CMD Check error
+			  ## in examples of tvctomat.Rd
+			  units2 <- ccov$units
+			  ccov <- ccov$ccov
+			  if(!is.null(units)&&is.null(units2))
 					units2 <- rep("NA",dim(ccov)[2])
 				if(is.null(units)&&!is.null(units2))
 					units <- rep("NA",dim(tvcov$tvcov)[2])}
@@ -1563,7 +1567,8 @@ z}
 
 ### print methods
 ###
-print.response <- function(z, nindmax=50){
+print.response <- function(x, nindmax=50, ...){
+  z <- x; rm(x)
 nobs <- nobs(z)
 nind <- length(nobs)
 cn <- colnames(z$y)
@@ -1652,7 +1657,8 @@ if(!is.null(z$description))for(i in 1:length(z$description)){
 	cat(names(z$description)[i],": ",sep="")
 	cat(z$description[[i]],"\n")}}
 
-print.tccov <- function(z){
+print.tccov <- function(x, ...){
+  z <- x; rm(x)
 if(is.function(z))print.default(unclass(z))
 else {
 	tmp <- matrix(colnames(z$ccov),nrow=1)
@@ -1667,7 +1673,8 @@ else {
 		cat(names(z$description)[i],": ",sep="")
 		cat(z$description[[i]],"\n")}}}
 
-print.tvcov <- function(z, nindmax=50){
+print.tvcov <- function(x, nindmax=50, ...){
+  z <- x; rm(x)
 if(is.function(z))print.default(unclass(z))
 else {
 	tmp <- matrix(colnames(z$tvcov),nrow=1)
@@ -1687,7 +1694,8 @@ else {
 		cat(names(z$description)[i],": ",sep="")
 		cat(z$description[[i]],"\n")}}}
 
-print.repeated <- function(z, nindmax=50){
+print.repeated <- function(x, nindmax=50, ...){
+  z <- x; rm(x)
 if(is.function(z))print.default(unclass(z))
 else {
 	cat("\nResponse variable:\n")
@@ -1701,48 +1709,50 @@ else {
 
 ### plot methods
 ###
-plot.response <- function(z, name=NULL, nind=NULL, nest=1, ccov=NULL,
+plot.response <- function(x, name=NULL, nind=NULL, nest=1, ccov=NULL,
 	add=FALSE, lty=NULL, pch=NULL, main=NULL, ylim=NULL, xlim=NULL,
 	xlab=NULL, ylab=NULL, ...){
 if(is.null(name)){
-	if(dim(z$y)[2]>1)stop("please specify which variable to plot")
-	name <- colnames(z$y)}
+	if(dim(x$y)[2]>1)stop("please specify which variable to plot")
+	name <- colnames(x$y)}
 else if(length(name)>1)stop("only one variable can be plotted")
-col <- match(name,colnames(z$y))
+col <- match(name,colnames(x$y))
 if(is.na(col))stop(paste(name,"not found"))
-if(z$type[col]=="ordinal"){
+if(x$type[col]=="ordinal"){
 	# special case: ordinal response
-	return(plot.ordinal(z=z,ccov=ccov,main=main,xlab=xlab,ylab=ylab,
-		xlim=xlim,ylim=ylim,lty=lty,add=add,...))}
+	#return(plot.ordinal(z=x,ccov=ccov,main=main,xlab=xlab,ylab=ylab,
+		#xlim=xlim,ylim=ylim,lty=lty,add=add,...))
+  stop(paste("email Bruce to email Jim for plot.ordinal() implementation"))
+  }
 if(is.null(ylab))ylab <- name
-if(is.null(z$times)){
+if(is.null(x$times)){
 #
 # when no times, set up for index plot
 #
-	if(all(nobs(z)==1)){
-		z$times <- 1:length(nobs(z))
+	if(all(nobs(x)==1)){
+		x$times <- 1:length(nobs(x))
 		# set to value different from 1 so not time series
-		z$nobs <- 5}
-	else z$times <- sequence(nobs(z))
+		x$nobs <- 5}
+	else x$times <- sequence(nobs(x))
 	if(is.null(xlab)) xlab <- "Index number"}
 else if(is.null(xlab)) xlab <- "Time"
-if(is.null(ylim))ylim <- range(z$y[,col],na.rm=TRUE)
-if(is.null(xlim))xlim <- range(z$times,na.rm=TRUE)
-tnest <- if(!is.null(z$nest)) z$nest else 1
+if(is.null(ylim))ylim <- range(x$y[,col],na.rm=TRUE)
+if(is.null(xlim))xlim <- range(x$times,na.rm=TRUE)
+tnest <- if(!is.null(x$nest)) x$nest else 1
 #
 # initialize
 #
-nm <- covind(z)
+nm <- covind(x)
 j <- 1
 lt <- 0
 #
 # if no individuals chosen, plot them all
 #
-if(is.null(nind))nind <- 1:length(nobs(z))
+if(is.null(nind))nind <- 1:length(nobs(x))
 #
 # if binomial, plot proportions
 #
-y <- if(is.null(z$n)||all(is.na(z$n[,col])))z$y[,col] else z$y[,col]/z$n[,col]
+y <- if(is.null(x$n)||all(is.na(x$n[,col])))x$y[,col] else x$y[,col]/x$n[,col]
 if(!is.null(lty)){
 #
 # set up line types
@@ -1757,25 +1767,25 @@ if(!is.null(pch)){
 	if(length(pch)==1)pch <- rep(pch,length(nind))
 	else if(length(pch)!=length(nind))
 		stop("pch must have one value for each item in nind")}
-for(i in 1:length(nobs(z)))if(any(i==nind))for(k in nest){
+for(i in 1:length(nobs(x)))if(any(i==nind))for(k in nest){
 	lt <- if(is.null(lty))lt%%6+1 else lty[j]
-	if(!add&&j==1)plot(z$times[nm==i&k==tnest],y[nm==i&k==tnest],lty=lt,
+	if(!add&&j==1)plot(x$times[nm==i&k==tnest],y[nm==i&k==tnest],lty=lt,
 		type="l",ylim=ylim,xlim=xlim,main=main,ylab=ylab,xlab=xlab,...)
-	else lines(z$times[nm==i&k==tnest],y[nm==i&k==tnest],lty=lt)
-	if(!is.null(pch))points(z$times[nm==i&k==tnest],
+	else lines(x$times[nm==i&k==tnest],y[nm==i&k==tnest],lty=lt)
+	if(!is.null(pch))points(x$times[nm==i&k==tnest],
 		y[nm==i&k==tnest],pch=pch[j])
 	j <- j+1}}
 
-plot.repeated <- function(z, name=NULL, nind=NULL, nest=1, ccov=NULL,
+plot.repeated <- function(x, name=NULL, nind=NULL, nest=1, ccov=NULL,
 	add=FALSE, lty=NULL, pch=NULL, main=NULL, ylim=NULL, xlim=NULL,
 	xlab=NULL, ylab=NULL, ...){
 if(is.null(name)){
-	if(dim(z$response$y)[2]>1)stop("please specify which variable to plot")
-	name <- colnames(z$response$y)}
+	if(dim(x$response$y)[2]>1)stop("please specify which variable to plot")
+	name <- colnames(x$response$y)}
 else if(length(name)>1)stop("only one variable name can be supplied")
-col <- match(name,colnames(z$response$y))
+col <- match(name,colnames(x$response$y))
 if(is.na(col)){
-	col <- match(name,colnames(z$tvcov$tvcov))
+	col <- match(name,colnames(x$tvcov$tvcov))
 	if(is.na(col))stop(paste(name,"not found"))
 	variable <- "tvc"}
 else variable <- "response"
@@ -1786,26 +1796,26 @@ else variable <- "response"
 uncov <- NULL
 if(!is.null(nind)&&!is.null(ccov))
 	stop("only one of nind and ccov can be specified")
-if(is.null(nind)&&is.null(ccov))nind <- 1:length(nobs(z))
-else if(!is.null(ccov)&&z$response$type[col]!="ordinal"){
+if(is.null(nind)&&is.null(ccov))nind <- 1:length(nobs(x))
+else if(!is.null(ccov)&&x$response$type[col]!="ordinal"){
 	if(is.numeric(ccov)){
-		if(length(ccov)!=dim(z$ccov$ccov)[2])
+		if(length(ccov)!=dim(x$ccov$ccov)[2])
 			stop("a covariate value must be given for each covariate")
-	        tccov <- z$ccov$ccov
+	        tccov <- x$ccov$ccov
 	        if(is.data.frame(tccov))for(i in 1:length(ccov)){
 	        	if(is.factor(tccov[[i]]))
 	        		tccov[[i]] <- as.numeric(tccov[[i]])}
 	        tccov <- as.matrix(tccov)
 		nind <- NULL
-		for(i in 1:length(nobs(z)))
+		for(i in 1:length(nobs(x)))
 			if(all(ccov==tccov[i,]))nind <- c(nind,i)}
 	else if(is.character(ccov)){
-		if(is.null(z$ccov$ccov))stop("no covariates found")
+		if(is.null(x$ccov$ccov))stop("no covariates found")
 		if(length(ccov)>1)
 			stop("only one variable name can be given in ccov")
-		col2 <- match(ccov,colnames(z$ccov$ccov))
+		col2 <- match(ccov,colnames(x$ccov$ccov))
 		if(is.na(col2))stop(paste("covariate",ccov,"not found"))
-		uncov <- unique(z$ccov$ccov[,col2])
+		uncov <- unique(x$ccov$ccov[,col2])
 		if(is.factor(uncov))uncov <- as.character(uncov)
 		if(length(uncov)>6)
 			stop(paste(ccov,"has too many distinct values to plot"))
@@ -1813,11 +1823,12 @@ else if(!is.null(ccov)&&z$response$type[col]!="ordinal"){
 	else stop("ccov must be a vector of covariate values or a covariate name")}
 if(variable=="response"){
 	# special case: ordinal response
-	if(z$response$type[col]=="ordinal")
-		plot.ordinal(z=z,ccov=ccov,main=main,xlab=xlab,ylab=ylab,
-			xlim=xlim,ylim=ylim,lty=lty,add=add,...)
+	if(x$response$type[col]=="ordinal")
+		#plot.ordinal(z=x,ccov=ccov,main=main,xlab=xlab,ylab=ylab,
+		#	xlim=xlim,ylim=ylim,lty=lty,add=add,...)
+	  stop(paste("email Bruce to email Jim for plot.ordinal() implementation"))
 	else {
-		if(is.null(uncov))plot.response(z$response,name=name,nind=nind,
+		if(is.null(uncov))plot.response(x$response,name=name,nind=nind,
 			nest=nest,add=add,lty=lty,pch=pch,main=main,
 			ylim=ylim,xlim=xlim,xlab=xlab,ylab=ylab,...)
 		else {
@@ -1827,18 +1838,18 @@ if(variable=="response"){
 			for(i in uncov){
 				nind <- NULL
 				main <- paste(ccov,"=",i)
-				for(j in 1:length(nobs(z)))
-					if(i==z$ccov$ccov[j,col2])
+				for(j in 1:length(nobs(x)))
+					if(i==x$ccov$ccov[j,col2])
 					nind <- c(nind,j)
-				plot.response(z$response,name=name,nind=nind,
+				plot.response(x$response,name=name,nind=nind,
 				nest=nest,add=add,lty=lty,pch=pch,main=main,
 				ylim=ylim,xlim=xlim,xlab=xlab,ylab=ylab,...)}
 			par(oldpar)}}}
 else if(variable=="tvc"){
 	# set up covariate as a "response"
-	if(is.null(ylab))ylab <- colnames(z$tvcov$tvcov)[col]
-	zz <- list(times=z$response$times,y=z$tvcov$tvcov[,col,drop=FALSE],
-		nobs=z$tvcov$nobs,n=NULL,type="unknown")
+	if(is.null(ylab))ylab <- colnames(x$tvcov$tvcov)[col]
+	zz <- list(times=x$response$times,y=x$tvcov$tvcov[,col,drop=FALSE],
+		nobs=x$tvcov$nobs,n=NULL,type="unknown")
 	class(zz) <- "response"
 	if(is.null(uncov))plot.response(zz,name=name,nind=nind,nest=nest,
 		add=add,lty=lty,pch=pch,main=main,ylim=ylim,xlim=xlim,
@@ -1850,8 +1861,8 @@ else if(variable=="tvc"){
 		for(i in uncov){
 			nind <- NULL
 			main <- paste(ccov,"=",i)
-			for(j in 1:length(nobs(z)))
-				if(i==z$ccov$ccov[j,col2])
+			for(j in 1:length(nobs(x)))
+				if(i==x$ccov$ccov[j,col2])
 				nind <- c(nind,j)
 			plot.response(zz,name=name,nind=nind,nest=nest,add=add,
 			lty=lty,pch=pch,main=main,ylim=ylim,xlim=xlim,
@@ -1862,7 +1873,7 @@ else if(variable=="tvc"){
 ###
 response <- function(z, ...) UseMethod("response")
 
-response.response <- function(z, nind=NULL, names=NULL){
+response.response <- function(z, nind=NULL, names=NULL, ...){
 if(is.null(nind))nind <- 1:dim(z$y)[1]
 else if(length(nind)>length(nobs(z))||any(nind>length(nobs(z))))
 	stop("Individual not found")
@@ -1888,7 +1899,7 @@ for(i in col){
 colnames(tmp) <- cn
 tmp[nind,]}
 
-response.repeated <- function(z, nind=NULL, names=NULL){
+response.repeated <- function(z, nind=NULL, names=NULL, ...){
 if(is.null(nind))nind <- 1:dim(z$response$y)[1]
 else if(length(nind)>length(nobs(z))||any(nind>length(nobs(z))))
 	stop("Individual not found")
@@ -1918,30 +1929,30 @@ tmp[nind,]}
 ###
 covind <- function(z, ...) UseMethod("covind")
 
-covind.default <- function(z) rep(1:length(nobs(z)),nobs(z))
+covind.default <- function(z, ...) rep(1:length(nobs(z)),nobs(z))
 
 ### methods to find numbers of observations/individual
 ###
 nobs <- function(z, ...) UseMethod("nobs")
 
-nobs.default <- function(z) {
+nobs.default <- function(z, ...) {
 if(is.null(z$response)||is.null(z$response$nobs))return(NULL)
 if(length(z$response$nobs)>1||z$response$nobs>1)z$response$nobs
 else rep(1,dim(z$response$y)[1])}
 
-nobs.response <- function(z) {
+nobs.response <- function(z, ...) {
 if(length(z$nobs)>1||z$nobs>1)z$nobs
 else rep(1,length(z$y))}
 
-nobs.tvcov <- function(z) z$nobs
+nobs.tvcov <- function(z, ...) z$nobs
 
-nobs.data.frame <- function(z) rep(1,dim(z)[1])
+nobs.data.frame <- function(z, ...) rep(1,dim(z)[1])
 
 ### methods to find times
 ###
 times <- function(z, ...) UseMethod("times")
 
-times.default <- function(z, nind=NULL){
+times.default <- function(z, nind=NULL, ...){
 if(is.null(nind)||is.null(z$response$times))return(z$response$times)
 else if(length(nind)>length(nobs(z))||any(nind>length(nobs(z))))
 	stop("Individual not found")
@@ -1949,7 +1960,7 @@ else nind <- !is.na(match(covind(z),nind))
 if(all(!nind))stop("No such individuals")
 z$response$times[nind]}
 
-times.response <- function(z, nind=NULL){
+times.response <- function(z, nind=NULL, ...){
 if(is.null(nind)||is.null(z$times))return(z$times)
 else if(length(nind)>length(nobs(z))||any(nind>length(nobs(z))))
 	stop("Individual not found")
@@ -1961,7 +1972,7 @@ z$times[nind]}
 ###
 delta <- function(z, ...) UseMethod("delta")
 
-delta.response <- function(z, nind=NULL, names=NULL){
+delta.response <- function(z, nind=NULL, names=NULL, ...){
 #
 # find individuals
 #
@@ -1978,7 +1989,7 @@ col <- if(is.null(names))1:dim(z$y)[2] else match(names,colnames(z$y))
 if(any(is.na(col)))stop(paste(names[is.na(col)],"not found"))
 z$delta[nind,col]}
 
-delta.repeated <- function(z, nind=NULL, names=NULL){
+delta.repeated <- function(z, nind=NULL, names=NULL, ...){
 #
 # find individuals
 #
@@ -1999,27 +2010,29 @@ z$response$delta[nind,col]}
 
 ### methods to find weights
 ###
-weights.response <- function(z, nind=NULL){
-if(is.null(nind)||is.null(z$wt))return(z$wt)
-else if(length(nind)>length(nobs(z))||any(nind>length(nobs(z))))
-	stop("Individual not found")
-else nind <- !is.na(match(covind(z),nind))
-if(all(!nind))stop("No such individuals")
-z$wt[nind]}
+weights <- function(object, ...) UseMethod("weights")
 
-weights.repeated <- function(z, nind=NULL){
-if(is.null(nind)||is.null(z$response$wt))return(z$response$wt)
-else if(length(nind)>length(nobs(z))||any(nind>length(nobs(z))))
+weights.response <- function(object, nind=NULL, ...){
+if(is.null(nind)||is.null(object$wt))return(object$wt)
+else if(length(nind)>length(nobs(object))||any(nind>length(nobs(object))))
 	stop("Individual not found")
-else nind <- !is.na(match(covind(z),nind))
+else nind <- !is.na(match(covind(object),nind))
 if(all(!nind))stop("No such individuals")
-z$response$wt[nind]}
+object$wt[nind]}
+
+weights.repeated <- function(object, nind=NULL, ...){
+if(is.null(nind)||is.null(object$response$wt))return(object$response$wt)
+else if(length(nind)>length(nobs(object))||any(nind>length(nobs(object))))
+	stop("Individual not found")
+else nind <- !is.na(match(covind(object),nind))
+if(all(!nind))stop("No such individuals")
+object$response$wt[nind]}
 
 ### methods to find nesting indicators
 ###
 nesting <- function(z, ...) UseMethod("nesting")
 
-nesting.response <- function(z, nind=NULL){
+nesting.response <- function(z, nind=NULL, ...){
 if(is.null(nind))nind <- 1:length(z$y)
 else if(length(nind)>length(nobs(z))||any(nind>length(nobs(z))))
 	stop("Individual not found")
@@ -2035,7 +2048,7 @@ else {
 	colnames(z) <- c("Individual","Cluster")
 	return(z)[nind,,drop=FALSE]}}
 
-nesting.repeated <- function(z, nind=NULL){
+nesting.repeated <- function(z, nind=NULL, ...){
 if(is.null(nind))nind <- 1:dim(z$response$y)[1]
 else if(length(nind)>length(nobs(z))||any(nind>length(nobs(z))))
 	stop("Individual not found")
@@ -2055,7 +2068,7 @@ else {
 ###
 covariates <- function(z, ...) UseMethod("covariates")
 
-covariates.tccov <- function(z, nind=NULL, names=NULL, expand=FALSE){
+covariates.tccov <- function(z, nind=NULL, names=NULL, expand=FALSE, ...){
 if(is.null(nind))nind <- 1:dim(z$ccov)[1]
 else if(length(nind)>dim(z$ccov)[1]||any(nind>dim(z$ccov)[1])||any(nind<1))
 	stop("Individual not found")
@@ -2066,7 +2079,7 @@ else {
 		stop(paste("covariate(s)",names[is.na(col)],"not found"))
 	return(z$ccov[nind,col])}}
 
-covariates.tvcov <- function(z, nind=NULL, names=NULL, expand=FALSE){
+covariates.tvcov <- function(z, nind=NULL, names=NULL, expand=FALSE, ...){
 if(is.null(nind))nind <- 1:dim(z$tvcov)[1]
 else if(length(nind)>length(nobs(z))||any(nind>length(nobs(z))))
 	stop("Individual not found")
@@ -2079,7 +2092,7 @@ else {
 		stop(paste("covariate(s)",names[is.na(col)],"not found"))
 	return(z$tvcov[nind,col])}}
 
-covariates.repeated <- function(z, nind=NULL, names=NULL, expand=FALSE){
+covariates.repeated <- function(z, nind=NULL, names=NULL, expand=FALSE, ...){
 if(expand&&!is.null(nind))stop("can only expand for all individuals")
 ind <- covind(z)
 if(is.null(nind)){
@@ -2112,33 +2125,33 @@ else {
 
 ### methods to find names
 ###
-names.response <- function(z) colnames(z$y)
+names.response <- function(x, ...) colnames(x$y)
 
-names.tccov <- function(z) colnames(z$ccov)
+names.tccov <- function(x, ...) colnames(x$ccov)
 
-names.tvcov <- function(z) colnames(z$tvcov)
+names.tvcov <- function(x, ...) colnames(x$tvcov)
 
-names.repeated <- function(z)
-	list(response=colnames(z$response$y),ccov=colnames(z$ccov$ccov),
-		tvcov=colnames(z$tvcov$tvcov))
+names.repeated <- function(x, ...)
+	list(response=colnames(x$response$y),ccov=colnames(x$ccov$ccov),
+		tvcov=colnames(x$tvcov$tvcov))
 
 ### methods to find units of measurements
 ###
-units <- function(z, ...) UseMethod("units")
+units <- function(x, ...) UseMethod("units")
 
-units.default <- function(z) z$units
+units.default <- function(x, ...) x$units
 
-units.repeated <- function(z)
-	list(response=units(z$response),ccov=units(z$ccov),
-		tvcov=units(z$tvcov))
+units.repeated <- function(x, ...)
+	list(response=units(x$response),ccov=units(x$ccov),
+		tvcov=units(x$tvcov))
 
 ### methods to find description of variables
 ###
 description <- function(z, ...) UseMethod("description")
 
-description.default <- function(z) z$description
+description.default <- function(z, ...) z$description
 
-description.repeated <- function(z)
+description.repeated <- function(z, ...)
 	list(response=description(z$response),ccov=description(z$ccov),
 		tvcov=description(z$tvcov))
 
@@ -2146,19 +2159,20 @@ description.repeated <- function(z)
 ###
 resptype <- function(z, ...) UseMethod("resptype")
 
-resptype.response <- function(z) z$type
+resptype.response <- function(z, ...) z$type
 
-resptype.repeated <- function(z) z$response$type
+resptype.repeated <- function(z, ...) z$response$type
 
 ### methods to find formula used in tccov
 ###
-formula.tccov <- function(z) z$linear
+formula.tccov <- function(x, ...) x$linear
 
-formula.repeated <- function(z) z$ccov$linear
+formula.repeated <- function(x, ...) x$ccov$linear
 
 ### methods to transform response, times, or covariates
 ###
-transform.response <- function(z, times=NULL, units=NULL, ...){
+transform.response <- function(`_data`, times=NULL, units=NULL, ...){
+  z <- `_data`; rm(`_data`)
 if(is.call(substitute(times)))times <- substitute(times)
 tran <- as.list(substitute(list(...)))[-1]
 if(!is.null(tran)){
@@ -2243,12 +2257,14 @@ if(!is.null(times)){
 		stop("transformation produces negative time steps")}
 z}
 
-transform.repeated <- function(z, times=NULL, ...){
+transform.repeated <- function(`_data`, times=NULL, ...){
+    z <- `_data`; rm(`_data`)
 if(is.call(substitute(times)))times <- substitute(times)
 z$response <- transform.response(z$response,times,...)
 z}
 
-transform.tccov <- function(z, ...){
+transform.tccov <- function(`_data`, ...){
+    z <- `_data`; rm(`_data`)
 isf <- is.data.frame(z$ccov)
 if(!isf)z$ccov <- as.data.frame(z$ccov)
 #
@@ -2268,7 +2284,8 @@ if(!all(matched))z$ccov <- data.frame(z$ccov,e[!matched])
 if(!isf)z$ccov <- as.matrix(z$ccov)
 z}
 
-transform.tvcov <- function(z, ...){
+transform.tvcov <- function(`_data`, ...){
+    z <- `_data`; rm(`_data`)
 isf <- is.data.frame(z$tvcov)
 if(!isf)z$tvcov <- as.data.frame(z$tvcov)
 #
@@ -2290,83 +2307,87 @@ z}
 
 ### as.data.frame methods
 ###
-as.data.frame.response <- function(z,row.names=NULL,optional=FALSE){
-	tmp <- data.frame(z$y)
-	if(!is.null(z$n))for(i in 1:dim(z$y)[2])if(any(!is.na(z$n[,i])))
-		tmp[[i]] <- I(cbind(z$y[,i],z$n[,i]-z$y[,i]))
-	if(!is.null(z$censor))for(i in 1:dim(z$y)[2])
-		if(any(!is.na(z$censor[,i])))
-			tmp[[i]] <- I(cbind(z$y[,i],z$censor[,i]))
-	cn <- colnames(z$y)
-	if(length(z$nobs)!=1){
+as.data.frame <- function(x, ...) UseMethod("as.data.frame")
+
+as.data.frame.response <- function(x,row.names=NULL,optional=FALSE, ...){
+	tmp <- data.frame(x$y)
+	if(!is.null(x$n))for(i in 1:dim(x$y)[2])if(any(!is.na(x$n[,i])))
+		tmp[[i]] <- I(cbind(x$y[,i],x$n[,i]-x$y[,i]))
+	if(!is.null(x$censor))for(i in 1:dim(x$y)[2])
+		if(any(!is.na(x$censor[,i])))
+			tmp[[i]] <- I(cbind(x$y[,i],x$censor[,i]))
+	cn <- colnames(x$y)
+	if(length(x$nobs)!=1){
 		cn <- c(cn,"individuals")
-		tmp <- data.frame(tmp,as.factor(rep(1:length(z$nobs),z$nobs)))}
-	if(!is.null(z$nest)){
+		tmp <- data.frame(tmp,as.factor(rep(1:length(x$nobs),x$nobs)))}
+	if(!is.null(x$nest)){
 		cn <- c(cn,"nesting")
-		tmp <- data.frame(tmp,as.factor(z$nest))}
-	if(!is.null(z$times)){
+		tmp <- data.frame(tmp,as.factor(x$nest))}
+	if(!is.null(x$times)){
 		cn <- c(cn,"times")
-		tmp <- data.frame(tmp,z$times)}
+		tmp <- data.frame(tmp,x$times)}
 	colnames(tmp) <- cn
 	data.frame(tmp)}
 
-as.data.frame.tccov <- function(z,row.names=NULL,optional=FALSE)
-	as.data.frame(z$ccov)
+as.data.frame.tccov <- function(x,row.names=NULL,optional=FALSE, ...)
+	as.data.frame(x$ccov)
 
-as.data.frame.tvcov <- function(z,row.names=NULL,optional=FALSE)
-	as.data.frame(z$tvcov)
+as.data.frame.tvcov <- function(x,row.names=NULL,optional=FALSE, ...)
+	as.data.frame(x$tvcov)
 
-as.data.frame.repeated <- function(z,row.names=NULL,optional=FALSE){
-	tmp <- data.frame(z$response$y)
-	if(!is.null(z$response$n))for(i in 1:dim(z$response$y)[2])
-		if(any(!is.na(z$response$n[,i])))
-			tmp[[i]] <- I(cbind(z$response$y[,i],z$response$n[,i]-z$response$y[,i]))
-	if(!is.null(z$response$censor))for(i in 1:dim(z$response$y)[2])
-		if(any(!is.na(z$response$censor[,i])))
-			tmp[[i]] <- I(cbind(z$response$y[,i],z$response$censor[,i]))
-	cn <- colnames(z$response$y)
-	if(!(length(z$response$nobs)==1)){
+as.data.frame.repeated <- function(x,row.names=NULL,optional=FALSE, ...){
+	tmp <- data.frame(x$response$y)
+	if(!is.null(x$response$n))for(i in 1:dim(x$response$y)[2])
+		if(any(!is.na(x$response$n[,i])))
+			tmp[[i]] <- I(cbind(x$response$y[,i],x$response$n[,i]-x$response$y[,i]))
+	if(!is.null(x$response$censor))for(i in 1:dim(x$response$y)[2])
+		if(any(!is.na(x$response$censor[,i])))
+			tmp[[i]] <- I(cbind(x$response$y[,i],x$response$censor[,i]))
+	cn <- colnames(x$response$y)
+	if(!(length(x$response$nobs)==1)){
 		cn <- c(cn,"individuals")
-		tmp <- data.frame(tmp,as.factor(rep(1:length(z$response$nobs),
-			z$response$nobs)))}
-	if(!is.null(z$response$nest)){
+		tmp <- data.frame(tmp,as.factor(rep(1:length(x$response$nobs),
+			x$response$nobs)))}
+	if(!is.null(x$response$nest)){
 		cn <- c(cn,"nesting")
-		tmp <- data.frame(tmp,as.factor(z$response$nest))}
-	if(!is.null(z$response$times)){
+		tmp <- data.frame(tmp,as.factor(x$response$nest))}
+	if(!is.null(x$response$times)){
 		cn <- c(cn,"times")
-		tmp <- data.frame(tmp,z$response$times)}
+		tmp <- data.frame(tmp,x$response$times)}
 	tmp <- data.frame(tmp)
 	colnames(tmp) <- cn
-	if(!is.null(z$ccov$ccov))
-		tmp <- data.frame(tmp,z$ccov$ccov[covind(z),,drop=FALSE])
-	if(!is.null(z$tvcov$tvcov))
-		tmp <- data.frame(tmp,z$tvcov$tvcov)
+	if(!is.null(x$ccov$ccov))
+		tmp <- data.frame(tmp,x$ccov$ccov[covind(x),,drop=FALSE])
+	if(!is.null(x$tvcov$tvcov))
+		tmp <- data.frame(tmp,x$tvcov$tvcov)
 	tmp}
 
 ### as.matrix methods
 ###
-as.matrix.response <- function(z){
-	tmp <- z$y
-	cn <- colnames(z$y)
-	if(!is.null(z$times)){
+as.matrix <- function(x, ...) UseMethod("as.matrix")
+
+as.matrix.response <- function(x, ...){
+	tmp <- x$y
+	cn <- colnames(x$y)
+	if(!is.null(x$times)){
 		cn <- c(cn,"times")
-		tmp <- cbind(tmp,z$times)}
+		tmp <- cbind(tmp,x$times)}
 	colnames(tmp) <- cn
 	tmp}
 
-as.matrix.tccov <- function(z) as.matrix(z$ccov)
+as.matrix.tccov <- function(x, ...) as.matrix(x$ccov)
 
-as.matrix.tvcov <- function(z) as.matrix(z$tvcov)
+as.matrix.tvcov <- function(x, ...) as.matrix(x$tvcov)
 
-as.matrix.repeated <- function(z){
-	tmp <- z$response$y
-	cn <- colnames(z$response$y)
-	if(!is.null(z$response$times)){
+as.matrix.repeated <- function(x, ...){
+	tmp <- x$response$y
+	cn <- colnames(x$response$y)
+	if(!is.null(x$response$times)){
 		cn <- c(cn,"times")
-		tmp <- cbind(tmp,z$response$times)}
+		tmp <- cbind(tmp,x$response$times)}
 	colnames(tmp) <- cn
-	if(!is.null(z$ccov$ccov))
-		tmp <- cbind(tmp,z$ccov$ccov[covind(z),,drop=FALSE])
-	if(!is.null(z$tvcov$tvcov))
-		tmp <- cbind(tmp,z$tvcov$tvcov)
+	if(!is.null(x$ccov$ccov))
+		tmp <- cbind(tmp,x$ccov$ccov[covind(x),,drop=FALSE])
+	if(!is.null(x$tvcov$tvcov))
+		tmp <- cbind(tmp,x$tvcov$tvcov)
 	tmp}

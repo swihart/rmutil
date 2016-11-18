@@ -4,13 +4,11 @@
 dskewlaplace(y, m=0, s=1, f=1, log=FALSE)
 pskewlaplace(q, m=0, s=1, f=1)
 qskewlaplace(p, m=0, s=1, f=1)
-hskewlaplace(y, m=0, s=1, f=1)
 rskewlaplace(n, m=0, s=1, f=1)
 }
 \alias{dskewlaplace}
 \alias{pskewlaplace}
 \alias{qskewlaplace}
-\alias{hskewlaplace}
 \alias{rskewlaplace}
 \description{
 These functions provide information about the skew Laplace distribution
@@ -37,7 +35,7 @@ and the variance by  \eqn{\frac{\sigma^2(1+\nu^4)}{2\nu^2}}{(s^2
 
 Note that this parametrization of the skew (family) parameter is
 different than that used for the multivariate skew Laplace
-distribution in \code{\link[growth]{elliptic}}.
+distribution in \code{elliptic}.
 }
 \arguments{
 \item{y}{vector of responses.}

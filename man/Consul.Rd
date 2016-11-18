@@ -32,9 +32,8 @@ for \eqn{y = 0, \ldots}.
 \seealso{
 \code{\link{dpois}} for the Poisson, \code{\link[rmutil]{ddoublepois}} for
 the double Poisson, \code{\link[rmutil]{dmultpois}} for
-the multiplicative Poisson, \code{\link[rmutil]{dpvfpois}} for the power
-variance function Poisson, and \code{\link[rmutil]{dnbinom}}
-for the negative binomial distribution.
+the multiplicative Poisson, and \code{\link[rmutil]{dpvfpois}} for the power
+variance function Poisson.
 }
 
 \examples{

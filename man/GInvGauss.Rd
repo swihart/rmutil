@@ -4,13 +4,11 @@
 dginvgauss(y, m, s, f, log=FALSE)
 pginvgauss(q, m, s, f)
 qginvgauss(p, m, s, f)
-hginvgauss(y, m, s, f)
 rginvgauss(n, m, s, f)
 }
 \alias{dginvgauss}
 \alias{pginvgauss}
 \alias{qginvgauss}
-\alias{hginvgauss}
 \alias{rginvgauss}
 \description{
 These functions provide information about the generalized inverse

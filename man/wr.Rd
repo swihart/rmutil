@@ -2,7 +2,7 @@
 \title{Find the Response Vector and Design Matrix for a W\&R Model Formula}
 \alias{wr}
 \usage{
-wr(formula, data=NULL, expand=T)
+wr(formula, data=NULL, expand=TRUE)
 }
 \description{
 \code{wr} gives the response vector and design matrix for a formula in

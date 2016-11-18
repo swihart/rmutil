@@ -1,29 +1,46 @@
 \name{DataMethods}
 \title{Methods for response, tccov, tvcov, and repeated Data Objects}
 \usage{
-as.data.frame(z)
-as.matrix(z)
-covariates(z, nind=NULL, names=NULL, expand=F)
-covind(z)
-delta(z, nind=NULL, names=NULL)
-formula(z)
-names(z)
-nesting(z, nind=NULL)
-nobs(z)
-plot(z, name=NULL, nind=NULL, nest=1, ccov=NULL, add=F, lty=NULL, pch=NULL,
+as.data.frame(x, ...)
+as.matrix(x, ...)
+covariates(z, ...)
+covind(z, ...)
+delta(z, ...)
+\method{formula}{tccov}(x, ...)
+\method{formula}{repeated}(x, ...)
+\method{names}{tccov}(x, ...)
+\method{names}{repeated}(x, ...)
+nesting(z, ...)
+nobs(z, ...)
+\method{plot}{response}(x, name=NULL, nind=NULL, nest=1, ccov=NULL, add=FALSE, lty=NULL, pch=NULL,
 	main=NULL, ylim=NULL, xlim=NULL, xlab=NULL, ylab=NULL, ...)
-print(z, nindmax=50)
-response(z, nind=NULL, names=NULL)
-resptype(z)
-times(z, nind=NULL)
-transform(z, times=NULL, ...)
-units(z)
-weights(z, nind=NULL)
+\method{plot}{repeated}(x, name=NULL, nind=NULL, nest=1, ccov=NULL, add=FALSE, lty=NULL, pch=NULL,
+	main=NULL, ylim=NULL, xlim=NULL, xlab=NULL, ylab=NULL, ...)
+\method{print}{tccov}(x, ...)
+\method{print}{repeated}(x, nindmax=50, ...)
+response(z, ...)
+resptype(z, ...)
+times(z, ...)
+\method{transform}{response}(`_data`, times=NULL, units=NULL, ...)
+\method{transform}{repeated}(`_data`, times=NULL, ...)
+units(x, ...)
+weights(object, ...)
 }
 \alias{DataMethods}
+\alias{as.data.frame}
+\alias{as.data.frame.repeated}
+\alias{as.data.frame.response}
+\alias{as.data.frame.tccov}
+\alias{as.data.frame.tvcov}
+\alias{as.matrix}
+\alias{as.matrix.repeated}
+\alias{as.matrix.response}
+\alias{as.matrix.tccov}
+\alias{as.matrix.tvcov}
+\alias{coef.gnlm}
 \alias{covariates}
 \alias{covariates.tccov}
-\alias{covariates.tvccov}
+\alias{covariates.tvcov}
 \alias{covariates.repeated}
 \alias{covind}
 \alias{covind.default}
@@ -33,8 +50,12 @@ weights(z, nind=NULL)
 \alias{description}
 \alias{description.default}
 \alias{description.repeated}
+\alias{deviance.gnlm}
+\alias{df.residual.gnlm}
+\alias{formula}
 \alias{formula.tccov}
 \alias{formula.repeated}
+\alias{names}
 \alias{names.response}
 \alias{names.tccov}
 \alias{names.tvcov}
@@ -53,6 +74,8 @@ weights(z, nind=NULL)
 \alias{print.tccov}
 \alias{print.tvcov}
 \alias{print.repeated}
+\alias{print.fmobj}
+\alias{print.gnlm}
 \alias{response}
 \alias{response.response}
 \alias{response.repeated}
@@ -62,6 +85,7 @@ weights(z, nind=NULL)
 \alias{times}
 \alias{times.default}
 \alias{times.response}
+\alias{transform}
 \alias{transform.response}
 \alias{transform.tccov}
 \alias{transform.tvcov}
@@ -69,8 +93,11 @@ weights(z, nind=NULL)
 \alias{units}
 \alias{units.default}
 \alias{units.repeated}
+\alias{vcov.gnlm}
+\alias{weights}
 \alias{weights.response}
 \alias{weights.repeated}
+\alias{weights.gnlm}
 \description{
 Objects of class, \code{response}, contain response values, and possibly
 the corresponding times, binomial totals, nesting categories, censor
@@ -168,18 +195,18 @@ and returns the latter.
 individuals.
 }
 \arguments{
-\item{z}{A \code{response}, \code{tccov}, \code{tvcov}, or
+\item{x,z}{A \code{response}, \code{tccov}, \code{tvcov}, or
 \code{repeated} data object. For \code{covind} and \code{nobs}, this
 may also be a model.}
-\item{y}{The function, when the response is to be transformed.}
+%\item{y}{The function, when the response is to be transformed.}
 \item{times}{The function, when the times are to be transformed.}
 \item{names}{The names of the response variable(s) or covariate(s).}
 \item{nind}{The numbers of individuals to be used. (For plotting,
 cannot be used simultaneously with \code{ccov}.)}
-\item{expand}{For intra-class (time-constant) covariates, if TRUE,
-expand them to give one value per observation rather than one per
-individual. Only works with \code{repeated} objects when all
-individuals are requested (\code{nind=NULL}).}
+%\item{expand}{For intra-class (time-constant) covariates, if TRUE,
+%expand them to give one value per observation rather than one per
+%individual. Only works with \code{repeated} objects when all
+%individuals are requested (\code{nind=NULL}).}
 \item{ccov}{For plotting: If a vector of values for the time-constant
 covariates is supplied, only individuals having that set of values
 will have profiles plotted. These values must be in the order in which
@@ -195,6 +222,10 @@ can have a maximum of six values.) Cannot be used simultaneously with
 \code{repeated} object, if the number of individuals is greater than
 \code{nindmax}, the range of numbers of observations per individual is
 printed instead of the vector of numbers.}
+\item{name,lty,pch,main,ylim,xlim,xlab,ylab}{ See base plot.}
+\item{_data,units,object}{ TBD.}
+\item{...}{ Arguments to other methods}
+
 }
 \value{
 These methods extract information stored in \code{response},

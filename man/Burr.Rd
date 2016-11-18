@@ -4,13 +4,11 @@
 dburr(y, m, s, f, log=FALSE)
 pburr(q, m, s, f)
 qburr(p, m, s, f)
-hburr(y, m, s, f)
 rburr(n, m, s, f)
 }
 \alias{dburr}
 \alias{pburr}
 \alias{qburr}
-\alias{hburr}
 \alias{rburr}
 \description{
 These functions provide information about the Burr distribution with

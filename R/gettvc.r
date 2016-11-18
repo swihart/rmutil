@@ -84,7 +84,7 @@ z2 <- .Fortran("gettvc",
 	wu=double(2*nld),
 	nld=as.integer(nld),
 	tvcov3=double(length(zr$y)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")
 if(isna){
 	tvcov3 <- rep(NA,nna)

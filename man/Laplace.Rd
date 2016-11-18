@@ -4,13 +4,11 @@
 dlaplace(y, m=0, s=1, log=FALSE)
 plaplace(q, m=0, s=1)
 qlaplace(p, m=0, s=1)
-hlaplace(y, m=0, s=1)
-rlaplace(n, m=0, s=1)
+rlaplace(n=1, m=0, s=1)
 }
 \alias{dlaplace}
 \alias{plaplace}
 \alias{qlaplace}
-\alias{hlaplace}
 \alias{rlaplace}
 \description{
 These functions provide information about the Laplace distribution

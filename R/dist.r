@@ -194,14 +194,19 @@ tmp}
 
 qlaplace <- function(p, m=0, s=1){
 h <- function(y){
-	u <- (y-m[i])/s[i]
-	t <- exp(-abs(u))/2
-	ifelse(u<0,t,1-t)-p[i]}
+  #u <- (y-m[i])/s[i]
+  #t <- exp(-abs(u))/2
+  #ifelse(u<0,t,1-t)-p[i]
+## bruce edit:
+  u <- (y-m)/s
+  t <- exp(-abs(u))/2
+  ifelse(u<0,t,1-t)-p
+	}
 if(any(p<0|p>1))stop("p must lie between 0 and 1")
 if(any(s<=0))stop("s must be positive")
 ifelse(p<0.5,s*log(2*p)+m,-s*log(2*(1-p))+m)}
 
-rlaplace <- function(n=1, m, s){
+rlaplace <- function(n = 1, m = 0, s = 1){
 if(any(s<=0))stop("s must be positive")
 q <- runif(n)
 ifelse(q<0.5,s*log(2*q)+m,-s*log(2*(1-q))+m)}
@@ -285,7 +290,7 @@ z <- .C("psimplex",
 	max=as.integer(16),
 	err=integer(1),
 	res=double(len),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")
 if(z$err==1)warning("Unable to allocate memory for integration")
 if(z$err==2)warning("Division by zero in integration")
@@ -312,7 +317,7 @@ h <- function(y).C("psimplex",
 	max=as.integer(16),
 	err=integer(1),
 	res=double(1),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res-p[i]
 if(any(p<0|p>1))stop("p must lie between 0 and 1")
 if(any(m<=0)||any(m>=1))stop("m must contain values between 0 and 1")
@@ -539,7 +544,7 @@ z <- .C("pginvgauss",
 	max=as.integer(16),
 	err=integer(1),
 	res=double(len),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")
 if(z$err==1)warning("Unable to allocate memory for integration")
 if(z$err==2)warning("Division by zero in integration")
@@ -566,7 +571,7 @@ h <- function(y).C("pginvgauss",
 	max=as.integer(16),
 	err=integer(1),
 	res=double(1),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res-p[i]
 if(any(p<0|p>1))stop("p must lie between 0 and 1")
 if(any(m<=0))stop("m must be positive")
@@ -723,7 +728,7 @@ z <- .C("ppowexp",
 	max=as.integer(16),
 	err=integer(1),
 	res=double(len),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")
 if(z$err==1)warning("Unable to allocate memory for integration")
 if(z$err==2)warning("Division by zero in integration")
@@ -752,7 +757,7 @@ h <- function(y) {
 	        max=as.integer(16),
 	        err=integer(1),
 	        res=double(1),
-	        DUP=FALSE,
+	        ## DUP=FALSE,
 		PACKAGE="rmutil")$res
 	if(y-m[i]>0) 0.5+z-p[i] else 0.5-z-p[i]}
 if(any(p<0|p>1))stop("p must lie between 0 and 1")
@@ -924,7 +929,7 @@ if(length(s)!=len){
 	as.double(s),
 	as.integer(length(q)),
 	res=double(length(q)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res}
 
 ddoublebinom <- function(y, size, m, s, log=FALSE){
@@ -954,7 +959,7 @@ tmp <- .C("ddb",
 	as.integer(length(y)),
 	as.double(rep(1,length(y))),
 	res=double(length(y)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res
 if(!log)tmp <- exp(tmp)
 tmp}
@@ -967,7 +972,7 @@ h <- function(y) .C("pdb",
 	as.double(s[i]),
 	as.integer(1),
 	res=double(1),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res-p[i]
 if(any(p<0|p>1))stop("p must lie between 0 and 1")
 if(any(m<=0)||any(m>=1))stop("m must lie between 0 and 1")
@@ -1023,7 +1028,7 @@ if(length(s)!=len){
 	as.double(s),
 	as.integer(length(q)),
 	res=double(length(q)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res}
 
 dmultbinom <- function(y, size, m, s, log=FALSE){
@@ -1053,7 +1058,7 @@ tmp <- .C("dmb",
 	as.integer(length(y)),
 	as.double(rep(1,length(y))),
 	res=double(length(y)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res
 if(!log)tmp <- exp(tmp)
 tmp}
@@ -1066,7 +1071,7 @@ h <- function(y).C("pmb",
 	as.double(s[i]),
 	as.integer(1),
 	res=double(1),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res-p[i]
 if(any(p<0|p>1))stop("p must lie between 0 and 1")
 if(any(m<=0)||any(m>=1))stop("m must lie between 0 and 1")
@@ -1117,7 +1122,7 @@ if(length(s)!=len){
 	as.double(s),
 	as.integer(length(q)),
 	res=double(length(q)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res}
 
 ddoublepois <- function(y, m, s, log=FALSE){
@@ -1142,7 +1147,7 @@ tmp <- .C("ddp",
 	as.integer(length(y)),
 	as.double(rep(1,length(y))),
 	res=double(length(y)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res
 if(!log)tmp <- exp(tmp)
 tmp}
@@ -1155,7 +1160,7 @@ h <- function(y).C("pdp",
 	as.double(s[i]),
 	as.integer(1),
 	res=double(1),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res-p[i]
 if(any(p<0|p>1))stop("p must lie between 0 and 1")
 if(any(m<0))stop("m must be positive")
@@ -1204,7 +1209,7 @@ if(length(s)!=len){
 	as.double(s),
 	as.integer(length(q)),
 	res=double(length(q)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res}
 
 dmultpois <- function(y, m, s, log=FALSE){
@@ -1229,7 +1234,7 @@ tmp <- .C("dmp",
 	as.integer(length(y)),
 	as.double(rep(1,length(y))),
 	res=double(length(y)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res
 if(!log)tmp <- exp(tmp)
 tmp}
@@ -1242,7 +1247,7 @@ h <- function(y).C("pmp",
 	as.double(s[i]),
 	as.integer(1),
 	res=double(1),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res-p[i]
 if(any(p<0|p>1))stop("p must lie between 0 and 1")
 if(any(m<0))stop("m must be positive")
@@ -1294,7 +1299,7 @@ if(length(f)!=len){
 	as.double(f),
 	as.integer(length(q)),
 	res=double(length(q)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res}
 
 dpvfpois <- function(y, m, s, f, log=FALSE){
@@ -1323,7 +1328,7 @@ tmp <- log(.C("dpvfp",
 	as.integer(length(y)),
 	as.double(rep(1,length(y))),
 	res=double(length(y)),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res)
 if(!log)tmp <- exp(tmp)
 tmp}
@@ -1336,7 +1341,7 @@ h <- function(y).C("ppvfp",
 	as.double(f[i]),
 	as.integer(1),
 	res=double(1),
-	DUP=FALSE,
+	## DUP=FALSE,
 	PACKAGE="rmutil")$res-p[i]
 if(any(p<0|p>1))stop("p must lie between 0 and 1")
 if(any(m<0))stop("m must be positive")
@@ -1381,7 +1386,7 @@ dgammacount <- function(y, m, s, log=FALSE){
 if(any(y<0))stop("y must contain non-negative values")
 if(any(m<=0))stop("m must be positive")
 if(any(s<=0))stop("s must be positive")
-tmp <- ifelse(y==0,pgamma(m*s,(y+1)*s,1,log=TRUE,lower=FALSE),
+tmp <- ifelse(y==0,pgamma(m*s,(y+1)*s,1,log.p=TRUE,lower.tail=FALSE),
 	log(pgamma(m*s,y*s+(y==0),1)-pgamma(m*s,(y+1)*s,1)))
 if(!log)tmp <- exp(tmp)
 tmp}

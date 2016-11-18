@@ -17,9 +17,11 @@ spectral decomposition.
 }
 \author{J.K. Lindsey}
 \examples{
+\dontrun{
 x <- matrix(c(0.4,0.6,0.6,0.4),nrow=2)
 x\%^\%2
 x\%^\%10
 x\%^\%20
+}
 }
 \keyword{array}

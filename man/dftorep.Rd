@@ -4,7 +4,7 @@
 \usage{
 dftorep(dataframe, response, id=NULL, times=NULL, censor=NULL,
 	totals=NULL, weights=NULL, nest=NULL, delta=NULL,
-	coordinates=NULL, type=NULL, ccov=NULL, tvcov=NULL, na.rm=T)
+	coordinates=NULL, type=NULL, ccov=NULL, tvcov=NULL, na.rm=TRUE)
 }
 \description{
 \code{dftorep} forms an object of class, \code{repeated}, from a

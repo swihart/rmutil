@@ -1,10 +1,16 @@
 \name{finterp}
 \title{Formula Interpreter}
 \alias{finterp}
+\alias{finterp.data.frame}
+\alias{finterp.default}
+\alias{finterp.repeated}
+\alias{finterp.tccov}
+\alias{finterp.tvcov}
 \usage{
-finterp(.z, .envir=parent.frame(), .formula=FALSE, .vector=TRUE,
+finterp(.z, ...)
+\method{finterp}{default}(.z, .envir=parent.frame(), .formula=FALSE, .vector=TRUE,
 	.args=NULL, .start=1, .name=NULL, .expand=TRUE, .intercept=TRUE,
-	.old=NULL, .response=FALSE)
+	.old=NULL, .response=FALSE, ...)
 }
 \description{
 \code{finterp} translates a model formula into a function of the
@@ -65,6 +71,7 @@ vector.}
 \item{.response}{If TRUE, any response variable can be used in the
 function. If FALSE, checks are made that the response is not also used
 as a covariate.}
+\item{...}{Arguments passed to other functions.}
 }
 \value{
 A function, of class \code{formulafn}, of the unknown parameters or of a

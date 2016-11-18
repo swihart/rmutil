@@ -1,9 +1,15 @@
 \name{fnenvir}
 \title{Check Covariates and Parameters of a Function}
 \alias{fnenvir}
+\alias{fnenvir.data.frame}
+\alias{fnenvir.default}
+\alias{fnenvir.repeated}
+\alias{fnenvir.tccov}
+\alias{fnenvir.tvcov}
 \usage{
-fnenvir(.z, .envir=sys.frame(sys.parent()), .name=NULL, .expand=TRUE,
-	.response=FALSE)
+fnenvir(.z, ...)
+\method{fnenvir}{default}(.z, .envir=parent.frame(), .name=NULL, .expand=TRUE,
+	.response=FALSE, ...)
 }
 \description{
 \code{fnenvir} finds the covariates and parameters in a function and
@@ -30,6 +36,7 @@ per individual. Ignored unless \code{.envir} is an object of class,
 \item{.response}{If TRUE, any response variable can be used in the
 function. If FALSE, checks are made that the response is not also used
 as a covariate.}
+\item{...}{Arguments passed to other functions.}
 }
 \value{
 The (modified) function, of class \code{formulafn}, is returned with its

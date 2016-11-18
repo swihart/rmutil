@@ -4,13 +4,11 @@
 dpareto(y, m, s, log=FALSE)
 ppareto(q, m, s)
 qpareto(p, m, s)
-hpareto(y, m, s)
 rpareto(n, m, s)
 }
 \alias{dpareto}
 \alias{ppareto}
 \alias{qpareto}
-\alias{hpareto}
 \alias{rpareto}
 \description{
 These functions provide information about the Pareto distribution

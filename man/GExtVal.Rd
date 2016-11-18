@@ -4,13 +4,11 @@
 dgextval(y, s, m, f, log=FALSE)
 pgextval(q, s, m, f)
 qgextval(p, s, m, f)
-hgextval(y, s, m, f)
 rgextval(n, s, m, f)
 }
 \alias{dgextval}
 \alias{pgextval}
 \alias{qgextval}
-\alias{hgextval}
 \alias{rgextval}
 \description{
 These functions provide information about the generalized extreme

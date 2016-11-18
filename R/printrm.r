@@ -23,16 +23,18 @@
 ### standard methods for gnlm models
 ###
 
-weights.gnlm <- function(z) z$prior.weights
+weights.gnlm <- function(object, ...) object$prior.weights
 
-df.residual.gnlm <- function(z) z$df
+df.residual.gnlm <- function(object, ...) object$df
 
-deviance.gnlm <- function(z) 2*z$maxlike
+deviance.gnlm <- function(object, ...) 2*object$maxlike
 
-coef.gnlm <- function(z){
+coef.gnlm <- function(object, ...){
+  z <- object; rm(object)
 gnlmm <- !is.null(z$points)
 mix <- z$npm>0||!is.null(z$mix)
 npl <- z$npl-gnlmm
+gnlmix <- z$npm>0&&is.null(z$mix) ## bruce added this line
 if(npl>0){
 	if(z$distribution=="own"){
 		cname <- if(is.character(attr(z$likefn,"model")))
@@ -77,10 +79,12 @@ coef <- z$coef
 names(coef) <- cname
 coef}
 
-vcov.gnlm <- function(z){
+vcov.gnlm <- function(object, ...){
+  z <- object; rm(object)
 gnlmm <- !is.null(z$points)
 mix <- z$npm>0||!is.null(z$mix)
 npl <- z$npl-gnlmm
+gnlmix <- z$npm>0&&is.null(z$mix) ## bruce added this line
 if(npl>0){
 	if(z$distribution=="own"){
 		cname <- if(is.character(attr(z$likefn,"model")))
@@ -128,7 +132,8 @@ vcov}
 
 ### print function for bnlr, gnlr, gnlr3, gnlmm, gnlmm3, and fmr
 ###
-print.gnlm <- function(z,digits=max(4,.Options$digits-3),correlation=TRUE) {
+print.gnlm <- function(x,digits=max(4,.Options$digits-3),correlation=TRUE, ...) {
+  z <- x; rm(x)
 sht <- z$nps>0||!is.null(z$shape)
 mix <- z$npm>0||!is.null(z$mix)
 gnlmm <- !is.null(z$points)

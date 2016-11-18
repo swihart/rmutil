@@ -90,7 +90,7 @@ finterp <- function(.z, ...) UseMethod("finterp")
 ###
 finterp.default <- function(.z, .envir=parent.frame(),
 	.formula=FALSE, .vector=TRUE, .args=NULL, .start=1, .name=NULL,
-	.expand=TRUE, .intercept=TRUE, .old=NULL, .response=FALSE){
+	.expand=TRUE, .intercept=TRUE, .old=NULL, .response=FALSE, ...){
 if(!inherits(.z,"formula"))return(NULL)
 #
 # find the appropriate environment if its name is supplied
@@ -227,7 +227,7 @@ return(.fna)}
 ###
 finterp.repeated <- function(.z, .envir=NULL, .formula=FALSE, .vector=TRUE,
 	.args=NULL, .start=1, .name=NULL, .expand=TRUE, .intercept=TRUE,
-	.old=NULL, .response=FALSE){
+	.old=NULL, .response=FALSE, ...){
 if(!inherits(.z,"formula"))return(NULL)
 #
 # check for common parameters
@@ -428,7 +428,7 @@ return(.fna)}
 ###
 finterp.tccov <- function(.z, .envir=NULL, .formula=FALSE, .vector=TRUE,
 	.args=NULL, .start=1, .name=NULL, .expand=NULL, .intercept=TRUE,
-	.old=NULL){
+	.old=NULL, ...){
 if(!inherits(.z,"formula"))return(NULL)
 #
 # check for common parameters
@@ -576,7 +576,7 @@ return(.fna)}
 ###
 finterp.tvcov <- function(.z, .envir=NULL, .formula=FALSE, .vector=TRUE,
 	.args=NULL, .start=1, .name=NULL, .expand=NULL, .intercept=TRUE,
-	.old=NULL){
+	.old=NULL, ...){
 if(!inherits(.z,"formula"))return(NULL)
 #
 # check for common parameters
@@ -723,7 +723,7 @@ return(.fna)}
 ###
 finterp.data.frame <- function(.z, .envir=NULL, .formula=FALSE, .vector=TRUE,
 	.args=NULL, .start=1, .name=NULL, .expand=NULL, .intercept=TRUE,
-	.old=NULL){
+	.old=NULL, ...){
 if(!inherits(.z,"formula"))return(NULL)
 #
 # check for common parameters
@@ -861,7 +861,7 @@ fnenvir <- function(.z, ...) UseMethod("fnenvir")
 ### default method
 ###
 fnenvir.default <- function(.z, .envir=parent.frame(), .name=NULL,
-	.expand=TRUE, .response=FALSE){
+	.expand=TRUE, .response=FALSE, ...){
 if(!is.function(.z))return(NULL)
 #
 # find the appropriate environment if its name is supplied
@@ -881,7 +881,7 @@ if(!is.environment(.envir)){
 #
 # transform function to a character string
 #
-.ch1 <- deparse(.z,width=500)
+.ch1 <- deparse(.z,width.cutoff=500)
 .ch2 <- .ch1[1]
 .ch1 <- .ch1[-1]
 #
@@ -969,7 +969,7 @@ return(.fnb)}
 ### method for repeated objects
 ###
 fnenvir.repeated <- function(.z, .envir=NULL, .name=NULL, .expand=TRUE,
-	.response=FALSE){
+	.response=FALSE, ...){
 if(!is.function(.z))return(NULL)
 #
 # find the appropriate environment if its name is supplied
@@ -983,7 +983,7 @@ else .name
 #
 # transform function to a character string
 #
-.ch1 <- deparse(.z,width=500)
+.ch1 <- deparse(.z,width.cutoff=500)
 .ch2 <- .ch1[1]
 .ch1 <- .ch1[-1]
 #
@@ -1122,7 +1122,7 @@ return(.fnb)}
 
 ### method for tccov objects
 ###
-fnenvir.tccov <- function(.z, .envir=NULL, .name=NULL, .expand=TRUE){
+fnenvir.tccov <- function(.z, .envir=NULL, .name=NULL, .expand=TRUE, ...){
 if(!is.function(.z))return(NULL)
 #
 # find the appropriate environment if its name is supplied
@@ -1133,7 +1133,7 @@ else .name
 #
 # transform function to a character string
 #
-.ch1 <- deparse(.z,width=500)
+.ch1 <- deparse(.z,width.cutoff=500)
 .ch2 <- .ch1[1]
 .ch1 <- .ch1[-1]
 #
@@ -1246,7 +1246,7 @@ return(.fnb)}
 
 ### method for tvcov objects
 ###
-fnenvir.tvcov <- function(.z, .envir=NULL, .name=NULL, .expand=TRUE){
+fnenvir.tvcov <- function(.z, .envir=NULL, .name=NULL, .expand=TRUE, ...){
 if(!is.function(.z))return(NULL)
 #
 # find the appropriate environment if its name is supplied
@@ -1257,7 +1257,7 @@ else .name
 #
 # transform function to a character string
 #
-.ch1 <- deparse(.z,width=500)
+.ch1 <- deparse(.z,width.cutoff=500)
 .ch2 <- .ch1[1]
 .ch1 <- .ch1[-1]
 #
@@ -1298,7 +1298,8 @@ if(length(.mem)>0){
 			if(.mem[.j]=="function"||.mem[.j]=="if"||
 				.mem[.j]=="else"||.mem[.j]=="for"||
 				.mem[.j]=="while"||.mem[.j]=="repeat") TRUE
-			else is.function(eval(parse(text=.mem[.j])))&&is.na(.ex1[.j])}
+		  #else is.function(eval(parse(text=.mem[.j])))&&is.na(.ex1[.j])} # bruce edit
+			else is.function(eval(parse(text=.mem[.j])))&&is.na(.ex2[.j])}
 			else FALSE)}
 	.un <- unique(.mem[is.na(.ex2)&!.fcn])
 	if(length(unique(.mem[!is.na(.ex2)&!.fcn]))==0&&length(.un)==0)
@@ -1370,7 +1371,7 @@ return(.fnb)}
 
 ### method for dataframes
 ###
-fnenvir.data.frame <- function(.z, .envir=NULL, .name=NULL, .expand=TRUE){
+fnenvir.data.frame <- function(.z, .envir=NULL, .name=NULL, .expand=TRUE, ...){
 if(!is.function(.z))return(NULL)
 #
 # find the appropriate environment if its name is supplied
@@ -1380,7 +1381,7 @@ else .name
 #
 # transform function to a character string
 #
-.ch1 <- deparse(.z,width=500)
+.ch1 <- deparse(.z,width.cutoff=500)
 .ch2 <- .ch1[1]
 .ch1 <- .ch1[-1]
 #
@@ -1485,7 +1486,8 @@ return(.fnb)}
 
 ### print methods
 ###
-print.formulafn <- function(z){
+print.formulafn <- function(x, ...){
+  z <- x; rm(x)
 if(!is.null(attr(z,"formula"))){
 	cat("\nformula:\n")
 	print.default(unclass(attr(z,"formula")))}
@@ -1513,7 +1515,8 @@ if(length(attr(z,"common"))>0){
 	cat("\n")}
 cat("\n")}
 
-print.fmobj <- function(z){
+print.fmobj <- function(x, ...){
+  z <- x; rm(x)
 if(any(z$parameters)){
 	tmp <- unique(z$objects[z$parameters])
 	cat(paste("\nparameters:\n"))
@@ -1546,11 +1549,11 @@ cat("\n")
 ###
 model <- function(z, ...) UseMethod("model")
 
-model.formulafn <- function(z) attr(z,"model")
+model.formulafn <- function(z, ...) attr(z,"model")
 
 ### extract the original formula
 ###
-formula.formulafn <- function(z) attr(z,"formula")
+formula.formulafn <- function(x, ...) attr(x,"formula")
 
 ### extract the covariate names
 ###
@@ -1560,4 +1563,4 @@ covariates.formulafn <- function(z, ...) attr(z,"covariates")
 ###
 parameters <- function(z, ...) UseMethod("parameters")
 
-parameters.formulafn <- function(z) attr(z,"parameters")
+parameters.formulafn <- function(z, ...) attr(z,"parameters")
