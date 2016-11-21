@@ -1,0 +1,11 @@
+Package: rmutil
+Version: 1.0
+Title: Utilities for Nonlinear Regression and Repeated Measurements Models
+Author: Jim Lindsey <jlindsey@luc.ac.be>
+Maintainer:  Jim Lindsey <jlindsey@luc.ac.be>
+Depends: R (>= 1.4)
+Description: A toolkit of functions for nonlinear regression and
+	repeated measurements not to be used by itself but called by
+	other libraries.
+License: GPL version 2 or later
+URL: www.luc.ac.be/~jlindsey/rcode.html

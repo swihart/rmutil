@@ -1,0 +1,124 @@
+%^%		Power of a Matrix
+contr.mean	Contrast Matrix for Constraints about the Mean
+covariates	Extract Covariate Matrices from a Data Object
+covind		Nesting Indicator for Observations within Individuals in a Data Object
+dbetabinom	Density of Beta Binomial Distribution
+dboxcox		Density of Box-Cox Distribution
+dburr		Density of Burr Distribution
+ddoublebinom	Density of Double Binomial Distribution
+ddoublepois	Density of Double Poisson Distribution
+delta		Extract Units of Measurement Vector from a Data Object
+dftorep		Transform a Dataframe to a repeated Object
+dgammacount	Density of Gamma Count Distribution
+dgextval	Density of Generalized Extreme Value Distribution
+dggamma		Density of Generalized Gamma Distribution
+dginvgauss	Density of Generalized Inverse Gaussian Distribution
+dglogis		Density of Generalized Logistic Distribution
+dgweibull	Density of Generalized Weibull Distribution
+dhjorth		Density of Hjorth Distribution
+dinvgauss	Density of Inverse Gaussian Distribution
+dlaplace	Density of Laplace Distribution
+dlevy		Density of Levy Distribution
+dmultbinom	Density of Multiplicative Binomial Distribution
+dmultpois	Density of Multiplicative Poisson Distribution
+dpareto		Density of Pareto Distribution
+dpowexp		Density of Power Exponential Distribution
+dpvfpois	Density of Power Variance Function Poisson Distribution
+dsimplex	Density of Simplex Distribution
+dskewlaplace	Density of Skew Laplace Distribution
+finterp		Formula Interpreter
+fnenvir		Check Covariates and Parameters of a Function
+fnobj		Object Finder
+formula		Extract Formula Used to Create Time-constant Covariate Matrix in a Data Object
+gauss.hermite	Calculate Gauss-Hermite Quadrature Points
+gettvc		Create Time-varying Covariates
+int		Vectorized One-dimensional Numerical Integration
+int2		Vectorized Two-dimensional Numerical Integration
+iprofile	Produce Individual Time Profiles for Plotting
+lin.diff.eqn	Solution of Autonomous Linear Differential Equations
+lvna		Create a Repeated Object Leaving NAs
+mexp		Matrix Exponentiation
+mprofile	Produce Marginal Time Profiles for Plotting
+names		Extract Names of Covariates from a Data Object
+nesting		Extract Nesting Indicators from a Data Object
+nobs		Extract Number of Observations per Individual from a Data Object
+pbetabinom	Distribution Function of Beta Binomial Distribution
+pboxcox		Distribution Function of Box-Cox Distribution
+pburr		Distribution Function of Burr Distribution
+pdoublebinom	Distribution Function of Double Binomial Distribution
+pdoublepois	Distribution Function of Double Poisson Distribution
+pgammacount	Distribution Function of Gamma Count Distribution
+pgextval	Distribution Function of Generalized Extreme Value Distribution
+pggamma		Distribution Function of Generalized Gamma Distribution
+pginvgauss	Distribution Function of Generalized Inverse Gaussian Distribution
+pglogis		Distribution Function of Generalized Logistic Distribution
+pgweibull	Distribution Function of Generalized Weibull Distribution
+phjorth		Distribution Function of Hjorth Distribution
+pinvgauss	Distribution Function of Inverse Gaussian Distribution
+pkpd		Pharmacokinetic Model Functions
+plaplace	Distribution Function of Laplace Distribution
+plevy		Distribution Function of Levy Distribution
+plot.residuals	Plot Residuals for contkal and kalcount
+pmultbinom	Distribution Function of Multiplicative Binomial Distribution
+pmultpois	Distribution Function of Multiplicative Poisson Distribution
+ppareto		Distribution Function of Pareto Distribution
+ppowexp		Distribution Function of Power Exponential Distribution
+ppvfpois	Distribution Function of Power Variance Function Poisson Distribution
+psimplex	Distribution Function of Simplex Distribution
+pskewlaplace	Distribution Function of Skew Laplace Distribution
+qbetabinom	Quantiles of Beta Binomial Distribution
+qboxcox		Quantiles of Box-Cox Distribution
+qburr		Quantiles of Burr Distribution
+qdoublebinom	Quantiles of Double Binomial Distribution
+qdoublepois	Quantiles of Double Poisson Distribution
+qgammacount	Quantiles of Gamma Count Distribution
+qgextval	Quantiles of Generalized Extreme Value Distribution
+qggamma		Quantiles of Generalized Gamma Distribution
+qginvgauss	Quantiles of Generalized Inverse Gaussian Distribution
+qglogis		Quantiles of Generalized Logistic Distribution
+qgweibull	Quantiles of Generalized Weibull Distribution
+qhjorth		Quantiles of Hjorth Distribution
+qinvgauss	Quantiles of Inverse Gaussian Distribution
+qlaplace	Quantiles of Laplace Distribution
+qlevy		Quantiles of Levy Distribution
+qmultbinom	Quantiles of Multiplicative Binomial Distribution
+qmultpois	Quantiles of Multiplicative Poisson Distribution
+qpareto		Quantiles of Pareto Distribution
+qpowexp		Quantiles of Power Exponential Distribution
+ppvfpois	Quantiles of Power Variance Function Poisson Distribution
+qsimplex	Quantiles of Simplex Distribution
+qskewlaplace	Quantiles of Skew Laplace Distribution
+rbetabinom	Random Number Generation for Beta Binomial Distribution
+rboxcox		Random Number Generation for Box-Cox Distribution
+rburr		Random Number Generation for Burr Distribution
+rdoublebinom	Random Number Generation for Double Binomial Distribution
+rdoublepois	Random Number Generation for Double Poisson Distribution
+read.list	Read a List of Matrices of Unbalanced Repeated Measurements from a File
+read.rep	Read a Rectangular Data Set from a File to Create a repeated Object
+read.surv	Read a List of Vectors of Event Histories from a File
+response	Extract Response Vector from a Data Object
+restovec	Create a Response Object
+rgammacount	Random Number Generation for Gamma Count Distribution
+rgextval	Random Number Generation for Generalized Extreme Value Distribution
+rggamma		Random Number Generation for Generalized Gamma Distribution
+rginvgauss	Random Number Generation for Generalized Inverse Gaussian Distribution
+rglogis		Random Number Generation for Generalized Logistic Distribution
+rgweibull	Random Number Generation for Generalized Weibull Distribution
+rhjorth		Random Number Generation for Hjorth Distribution
+rinvgauss	Random Number Generation for Inverse Gaussian Distribution
+rlaplace	Random Number Generation for Laplace Distribution
+rlevy		Random Number Generation for Levy Distribution
+rmna		Create a Repeated Object Removing NAs
+rmultbinom	Random Number Generation for Multiplicative Binomial Distribution
+rmultpois	Random Number Generation for Multiplicative Poisson Distribution
+rpareto		Random Number Generation for Pareto Distribution
+rpowexp		Random Number Generation for Power Exponential Distribution
+rpvfpois	Random Number Generation for Power Variance Function Poisson Distribution
+rsimplex	Random Number Generation for Simplex Distribution
+rskewlaplace	Random Number Generation for Skew Laplace Distribution
+runge.kutta	Runge-Kutta Method for Solving Differential Equations
+tcctomat	Create a Time-constant Covariate (tccov) Object
+times		Extract Times Vector from a Data Object
+transform	Transform Variables in a Data Object
+tvctomat	Create a Time-varying Covariate (tvcov) Object
+wr		Find the Response Vector and Design Matrix for a Model Formula
