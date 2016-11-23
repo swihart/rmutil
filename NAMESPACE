@@ -3,7 +3,7 @@ useDynLib("rmutil")
   importFrom("graphics", "lines", "par", "plot", "points")
   importFrom("stats", "as.formula", "deriv", "dgamma", "dnorm",
              "dweibull", "fitted", "model.frame", "model.matrix",
-             "model.response", "pgamma", "pnorm", "pweibull", "qgamma",
+             "model.response", "nobs", "pgamma", "pnorm", "pweibull", "qgamma",
              "qnbinom", "qnorm", "qweibull", "residuals", "runif",
              "terms", "uniroot")
   importFrom("utils", "read.table")
@@ -122,5 +122,7 @@ transform.response,transform.repeated,transform.tccov,transform.tvcov,
 tvctomat,wr,
 units.default,units.repeated,
 weights.response,weights.repeated)
+
+
 
 
