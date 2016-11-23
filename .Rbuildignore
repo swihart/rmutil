@@ -10,3 +10,4 @@ QEE2.out
 ^\.travis\.yml$
 cran-comments.md
 ^NEWS\.md$
+^\.gitignore$
