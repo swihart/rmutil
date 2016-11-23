@@ -2,6 +2,11 @@
 Bruce Swihart  
 November 2016  
 
+## Resubmission
+This is a resubmission.  In this version I have single quoted software names
+in DESCRIPTION file and include a link to Lindsey's homepage to get the listed packages. 
+The plan is to get all the listed packages on CRAN, but for now they are on his webpage.
+
 ## Test environments
 * local OS X install: R version 3.3.2 (2016-10-31)
 * ubuntu 12.04 (on travis-ci): R version 3.3.1 (2016-06-21)
