@@ -1,11 +1,14 @@
 ------------------------------------------------------------------------------
-version 1.1
+version 1.1.0
 ------------------------------------------------------------------------------
 
 ## Major changes ##
 
-Passed CRAN checks and is back on CRAN.  Please see github page
-to see the changes.  I'll try to document the changes henceforth.
+Passed CRAN checks and is back on CRAN.  Please see github page 
+https://github.com/swihart/rmutil to see the changes required 
+to pass CRAN checks.
+I'll try to document the changes henceforth here and at 
+https://github.com/swihart/rmutil/issues.
 
 
 ------------------------------------------------------------------------------
