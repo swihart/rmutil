@@ -1,12 +1,11 @@
 Package: rmutil
-Version: 1.1.4
+Version: 1.1
 Title: Utilities for Nonlinear Regression and Repeated Measurements Models
 Authors@R: c(
     person("Bruce", "Swihart", email="bruce.swihart@gmail.com", role=c("cre", "aut")),
     person("Jim"  , "Lindsey", email="jlindsey@gen.unimaas.nl", role="aut", comment="Jim created this package, Bruce is maitaining the CRAN version"))
 Depends:
-    R (>= 1.4),
-    stats
+    R (>= 1.4)
 Description: A toolkit of functions for nonlinear regression and repeated
     measurements not to be used by itself but called by other Lindsey packages such
     as gnlm, stable, growth, repeated, event and dna.
