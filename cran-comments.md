@@ -2,7 +2,17 @@
 Bruce Swihart  
 November 2016  
 
-## Resubmission
+## Resubmission 2
+This is a resubmission.
+1. Can you pls convince J. Lindsey to send a confirmation message?
+--> Yes.  He should be sending one shortly from jlindsey@gen.unimaas.nl to 
+CRAN@R-project.org, ligges@statistik.tu-dortmund.de, Kurt.Hornik@wu.ac.at
+
+2. pls write the URL as:
+ (available at <http://www.commanster.eu/rcode.html>).
+--> Completed.  
+
+## Resubmission 1
 This is a resubmission.  In this version I have single quoted software names
 in DESCRIPTION file and include a link to Lindsey's homepage to get the listed packages. 
 The plan is to get all the listed packages on CRAN, but for now they are on his webpage.
