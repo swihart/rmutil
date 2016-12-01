@@ -1,4 +1,5 @@
 [![Travis-CI Build Status](https://travis-ci.org/swihart/rmutil.svg?branch=master)](https://travis-ci.org/swihart/rmutil)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rmutil)](https://cran.r-project.org/package=rmutil)  ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/rmutil)
 
 # `rmutil` R package
 
