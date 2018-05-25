@@ -5,10 +5,4 @@ warnings_are_errors: true
 sudo: required
 
 env:
- global:
-   - CRAN: http://cran.rstudio.com
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+  - _R_CHECK_LENGTH_1_CONDITION_=true
