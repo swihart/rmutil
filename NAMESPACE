@@ -120,7 +120,7 @@ restovec,rmna,runge.kutta,tcctomat,
 times,times.default,times.response,
 transform.response,transform.repeated,transform.tccov,transform.tvcov,
 tvctomat,wr,
-units.default,units.repeated,
+units,units.default,units.repeated,
 weights.response,weights.repeated)
 
 
