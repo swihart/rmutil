@@ -84,7 +84,7 @@ S3method(weights,       gnlm)
 S3method(weights,       repeated) 
 S3method(weights,       response)
 
-export(as.data.frame.response,as.data.frame.tccov,as.data.frame.tvcov,as.data.frame.repeated,
+export(as.data.frame, as.data.frame.response,as.data.frame.tccov,as.data.frame.tvcov,as.data.frame.repeated,
 as.matrix.response,as.matrix.tccov,as.matrix.tvcov,as.matrix.repeated,
 capply,contr.mean,
 covariates,covariates.formulafn,covariates.tccov,covariates.tvcov,covariates.repeated,
