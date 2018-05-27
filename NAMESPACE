@@ -1,4 +1,4 @@
-useDynLib("rmutil")
+useDynLib("rmutil",.registration=TRUE)
 
   importFrom("graphics", "lines", "par", "plot", "points")
   importFrom("stats", "as.formula", "deriv", "dgamma", "dnorm",

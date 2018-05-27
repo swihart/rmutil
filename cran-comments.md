@@ -1,5 +1,30 @@
 # rmutil R package
 Bruce Swihart  
+May 2018
+
+## Re-Submission 1
+
+  * fixed an `Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’` NOTE.  
+
+  * fixed an `_R_CHECK_LENGTH_1_CONDITION_=true` error.  This was communicated to me via email on Jan 25 2018.
+
+  * fixed `_R_S3_METHOD_LOOKUP_BASEENV_AFTER_GLOBALENV_=true` errors. Added this info to NEWS.  Kurt Hornik has emailed me about these issues on Apr 2 and May 15.
+
+## Test environments
+* local OS X install: R version 3.4.1 (2017-06-30)
+* ubuntu 12.04 (on travis-ci): R version 3.5.0 (2017-01-27)
+* win-builder: R Under development (unstable) (2018-05-20 r74747) -- "Unsuffered Consequences"
+
+## R CMD check results
+There were no ERRORs or WARNINGs or NOTEs.
+
+
+## Downstream dependencies
+There are currently no downstream dependencies for this package.
+
+
+# rmutil R package
+Bruce Swihart  
 November 2016  
 
 ## Resubmission 2
