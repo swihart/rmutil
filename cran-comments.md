@@ -13,7 +13,7 @@ May 2018
 ## Test environments
 * local OS X install: R version 3.4.1 (2017-06-30)
 * ubuntu 12.04 (on travis-ci): R version 3.5.0 (2017-01-27)
-* win-builder: R Under development (unstable) (2018-05-20 r74747) -- "Unsuffered Consequences"
+* win-builder: R Under development (unstable) (2018-05-25 r74783) "Unsuffered Consequences"
 
 ## R CMD check results
 There were no ERRORs or WARNINGs or NOTEs.
