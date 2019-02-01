@@ -8,7 +8,7 @@ Feb 2019
 
 ## Test environments
 * local OS X install: R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
-* ubuntu 12.04 (on travis-ci): R version 3.5.0 (2017-01-27)
+* Ubuntu 14.04.5 LTS (on travis-ci): R version 3.5.2 (2017-01-27)
 * win-builder: R Under development (unstable) (2019-01-31 r76038)
 
 ## R CMD check results
