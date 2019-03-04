@@ -1,10 +1,11 @@
 # rmutil R package
 Bruce Swihart  
-Feb 2019
+Mar 2019
 
 ## Re-Submission 1
 
-  * Fixed pbetabinom and dbetabinom to return sensical values and print message for inputs that are not in the domain
+  * Applied more fixes pbetabinom and dbetabinom to return sensical values and print message for inputs that are not in the domain
+  * removed the local generic weights (as suggested by K Hornik)
 
 ## Test environments
 * local OS X install: R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
