@@ -10,7 +10,7 @@ Mar 2019
 ## Test environments
 * local OS X install: R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
 * Ubuntu 14.04.5 LTS (on travis-ci): R version 3.5.2 (2017-01-27)
-* win-builder: R Under development (unstable) (2019-01-31 r76038)
+* win-builder: R Under development (unstable) (2019-03-03 r76192)
 
 ## R CMD check results
 There were no ERRORs or WARNINGs or NOTEs.
