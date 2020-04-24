@@ -1,5 +1,24 @@
 # rmutil R package
 Bruce Swihart  
+Apr 2020
+
+## Submission 1
+
+  * Adding stringsAsFactors = TRUE to the relevant calls to data.frame() or
+    read.table() [or other read.* function calling read.table()] 
+    (as notified in email from K Hornik)
+
+## Test environments
+* local OS X install: R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+* Ubuntu 14.04.5 LTS (on travis-ci): R version 3.5.2 (2017-01-27)
+* win-builder: R Under development (unstable) (2019-03-03 r76192)
+
+## R CMD check results
+There were no ERRORs or WARNINGs or NOTEs.
+
+
+# rmutil R package
+Bruce Swihart  
 Mar 2019
 
 ## Re-Submission 1
