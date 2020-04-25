@@ -4,14 +4,18 @@ Apr 2020
 
 ## Submission 1
 
-  * Adding stringsAsFactors = TRUE to the relevant calls to data.frame() or
-    read.table() [or other read.* function calling read.table()] 
-    (as notified in email from K Hornik)
+  * In response to K. Hornik email regarding the stringsAsFactors=FALSE default in upcoming R versions, I did the following 3 edits:
+  * add `stringsAsFactors=TRUE` to the v <- data.frame() call in the example of `tvctomat.Rd`
+  * add `stringsAsFactors=TRUE` to the data.frame() call around line 1160 of the function `tvctomat()` in `objectrm.r` (`oldtvcov$tvcov <- data.frame(oldtvcov$tvcov,tvcv, stringsAsFactors = TRUE)`
+  * turn `tvcv <- as.data.frame(as.vector(t(as.matrix(tvcov))))` into `tvcv <- data.frame(as.character(as.vector(t(as.matrix(tvcov)))),stringsAsFactors=TRUE)` around line 940 of the function `tvctomat()` in `objectrm.r`
+
 
 ## Test environments
+* using platform: x86_64-pc-linux-gnu (64-bit) (`rhub::check_with_rdevel()`): R Under development (unstable) (2020-04-18 r78254)
+* using platform: x86_64-w64-mingw32 (64-bit) (`rhub::check_on_windows()`): R version 4.0.0 (2020-04-24)
 * local OS X install: R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
-* Ubuntu 14.04.5 LTS (on travis-ci): R version 3.5.2 (2017-01-27)
-* win-builder: R Under development (unstable) (2019-03-03 r76192)
+* Ubuntu 16.04.6 LTS (on travis-ci): R version 3.6.2 (2017-01-27)
+
 
 ## R CMD check results
 There were no ERRORs or WARNINGs or NOTEs.

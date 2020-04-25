@@ -2,9 +2,12 @@
 version 1.1.4
 ------------------------------------------------------------------------------
 
-  * Added stringsAsFactors = TRUE to the relevant calls to data.frame() or
-    read.table() [or other read.* function calling read.table()].
-    Issue https://github.com/swihart/rmutil/issues/8. 
+
+  * In response to K. Hornik email regarding the stringsAsFactors=FALSE default in upcoming R versions, I did the following 3 edits:
+  * add `stringsAsFactors=TRUE` to the v <- data.frame() call in the example of `tvctomat.Rd`
+  * add `stringsAsFactors=TRUE` to the data.frame() call in the function `tvctomat()` (around line 1160 in `objectrm.r`): (`oldtvcov$tvcov <- data.frame(oldtvcov$tvcov,tvcv, stringsAsFactors = TRUE)`
+  * turn `tvcv <- as.data.frame(as.vector(t(as.matrix(tvcov))))` into `tvcv <- data.frame(as.character(as.vector(t(as.matrix(tvcov)))),stringsAsFactors=TRUE)`  in the function `tvctomat()` (around line 937 of `objectrm.r`)
+  * Issue https://github.com/swihart/rmutil/issues/8. 
 
 ------------------------------------------------------------------------------
 version 1.1.3
