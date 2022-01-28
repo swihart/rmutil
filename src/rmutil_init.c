@@ -21,7 +21,7 @@ extern void pmp(void *, void *, void *, void *, void *, void *);
 extern void ppowexp_c(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void ppvfp(void *, void *, void *, void *, void *, void *);
 extern void psimplex_c(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern void romberg(void *, void *, void *, void *, void *, void *, void *, void *, void *);
+//extern void romberg(void *, void *, void *, void *, void *, void *, void *, void *, void *);
 
 /* .Fortran calls */
 extern void F77_NAME(gettvc_f)(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
@@ -41,7 +41,15 @@ static const R_CMethodDef CEntries[] = {
   {"ppowexp_c",    (DL_FUNC) &ppowexp_c,    10},
   {"ppvfp",        (DL_FUNC) &ppvfp,         6},
   {"psimplex_c",   (DL_FUNC) &psimplex_c,   10},
-  {"romberg",      (DL_FUNC) &romberg,       9},
+//  {"romberg",      (DL_FUNC) &romberg,       9},
+  {NULL, NULL, 0}
+};
+
+/* .Call()  */
+extern void romberg_sexp(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
+
+static const R_CallMethodDef callMethods[]  = {
+  {"romberg_sexp", (DL_FUNC) &romberg_sexp, 9},
   {NULL, NULL, 0}
 };
 
@@ -52,6 +60,6 @@ static const R_FortranMethodDef FortranEntries[] = {
 
 void R_init_rmutil(DllInfo *dll)
 {
-  R_registerRoutines(dll, CEntries, NULL, FortranEntries, NULL);
+  R_registerRoutines(dll, CEntries, callMethods, FortranEntries, NULL);
   R_useDynamicSymbols(dll, FALSE);
 }

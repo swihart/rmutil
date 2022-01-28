@@ -37,7 +37,8 @@ int <- function(f, a=-Inf, b=Inf, type="Romberg", eps=0.0001,
 # function to call the C code
 #
 int1 <- function(ff, aa, bb){
-	z <- .C("romberg",
+  envir2 <- environment(fun=ff)
+	z <- .Call("romberg_sexp",
 		ff,
 		as.double(aa),
 		as.double(bb),
@@ -46,12 +47,10 @@ int1 <- function(ff, aa, bb){
 		pts=as.integer(d),
 		max=as.integer(max),
 		err=integer(1),
-		res=double(len),
+		envir2,
 		PACKAGE="rmutil")
-	if(z$err==1)warning("Unable to allocate memory for int")
-	if(z$err==2)warning("Division by zero in int")
-	else if(z$err==3)warning("No convergence in int")
-	z$res}
+z	
+}
 #
 # check algorithm to be used and initialize parameters
 #
@@ -194,21 +193,20 @@ g <- function(y){
 # function to call the C code
 #
 int1 <- function(ff, aa, bb){
-	z <- .C("romberg",
-		ff,
-		as.double(aa),
-		as.double(bb),
-		len=as.integer(len),
-		eps=as.double(eps),
-		pts=as.integer(d),
-		max=as.integer(max),
-		err=integer(1),
-		res=double(len),
-		PACKAGE="rmutil")
-	if(z$err==1)warning("Unable to allocate memory for int2")
-	if(z$err==2)warning("Division by zero in int2")
-	else if(z$err==3)warning("No convergence in int2")
-	z$res}
+	envir2 <- environment(fun=ff)
+	z <- .Call("romberg_sexp",
+	           ff,
+	           as.double(aa),
+	           as.double(bb),
+	           len=as.integer(len),
+	           eps=as.double(eps),
+	           pts=as.integer(d),
+	           max=as.integer(max),
+	           err=integer(1),
+	           envir2,
+	           PACKAGE="rmutil")
+	z	
+	}
 #
 # function for Romberg integration
 #
