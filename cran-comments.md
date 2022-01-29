@@ -1,17 +1,21 @@
 # rmutil R package
 Bruce Swihart  
-Jun 2020
+Jan 2022
 
 ## Submission 1
 
-  * Updated BetaBinomial help documentation to relate `m` and `s` to the standard/traditional `alpha` and `beta` parameterization.
-  * Fixed `Condition has length > 1 and only the first element will be used` warning in `int`. 
 
+  * Fixed call_R Issue https://github.com/swihart/rmutil/issues/11
+  * Updated links to https: where appropriate
+  
+  
 ## Test environments
-* using platform: x86_64-pc-linux-gnu (64-bit) (`rhub::check_with_rdevel()`): R Under development (unstable) (2020-06-08 r78660)
-* using platform: x86_64-w64-mingw32 (64-bit) (`rhub::check_on_windows()`): R version 4.0.1 (2020-06-06)
-* local OS X install: R version 4.0.0 (2020-04-24) -- "Arbor Day"
-* Ubuntu 16.04.6 LTS (on travis-ci): R version 3.6.2 (2017-01-27)
+Local OS X: R version 4.1.2 (2021-11-01)
+  * Platform: x86_64-apple-darwin17.0 (64-bit)
+  * Running under: macOS Mojave 10.14.6
+rhub::check(platform = "debian-clang-devel"): Debian Linux, R-devel, clang, ISO-8859-15 locale
+rhub::check(platform = "windows-x86_64-devel"): Windows Server 2022, R-devel, 64 bit
+macOS M1 Builder: https://mac.r-project.org/macbuilder/results/1643420508-76f46f833c9dced1/
 
 
 ## R CMD check results
