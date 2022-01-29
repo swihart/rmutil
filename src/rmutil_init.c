@@ -12,7 +12,7 @@ extern void ddp(void *, void *, void *, void *, void *, void *, void *);
 extern void dmb(void *, void *, void *, void *, void *, void *, void *);
 extern void dmp(void *, void *, void *, void *, void *, void *, void *);
 extern void dpvfp(void *, void *, void *, void *, void *, void *, void *);
-extern void inthp(void *, void *, void *, void *, void *, void *, void *, void *, void *);
+//extern void inthp(void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void pdb(void *, void *, void *, void *, void *, void *);
 extern void pdp(void *, void *, void *, void *, void *, void *);
 extern void pginvgauss_c(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
@@ -32,7 +32,7 @@ static const R_CMethodDef CEntries[] = {
   {"dmb",          (DL_FUNC) &dmb,           7},
   {"dmp",          (DL_FUNC) &dmp,           7},
   {"dpvfp",        (DL_FUNC) &dpvfp,         7},
-  {"inthp",        (DL_FUNC) &inthp,         9},
+//  {"inthp",        (DL_FUNC) &inthp,         9},
   {"pdb",          (DL_FUNC) &pdb,           6},
   {"pdp",          (DL_FUNC) &pdp,           6},
   {"pginvgauss_c", (DL_FUNC) &pginvgauss_c, 10},
@@ -47,9 +47,11 @@ static const R_CMethodDef CEntries[] = {
 
 /* .Call()  */
 extern void romberg_sexp(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
+extern void   inthp_sexp(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 
 static const R_CallMethodDef callMethods[]  = {
   {"romberg_sexp", (DL_FUNC) &romberg_sexp, 9},
+  {"inthp_sexp", (DL_FUNC) &inthp_sexp, 9},
   {NULL, NULL, 0}
 };
 

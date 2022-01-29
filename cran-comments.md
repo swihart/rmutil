@@ -10,6 +10,12 @@ Jan 2022
   
   
 ## Test environments
+Local OS X: R version 4.1.2 (2021-11-01)
+  * Platform: x86_64-apple-darwin17.0 (64-bit)
+  * Running under: macOS Mojave 10.14.6
+rhub::check(platform = "debian-clang-devel"): Debian Linux, R-devel, clang, ISO-8859-15 locale
+rhub::check(platform = "windows-x86_64-devel"): Windows Server 2022, R-devel, 64 bit
+macOS M1 Builder: https://mac.r-project.org/macbuilder/results/1643420508-76f46f833c9dced1/
 
 
 ## R CMD check results

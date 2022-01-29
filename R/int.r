@@ -127,6 +127,7 @@ else {
 #
 # TOMS614
 #
+  envir2 <- environment(fun=f) ## Bruce: .C -> .Call edit
 	left <- a==-Inf&&b!=Inf
 	if(all(b==Inf)){
 		if(all(a==-Inf)){
@@ -145,7 +146,7 @@ else {
 	if(left){
 	# lower limit infinite, upper limit numeric: calculate for
 	# whole real line first
-		z2 <- .C("inthp",
+		z2 <- .Call("inthp_sexp",
 		a=as.double(b),
 		b=as.double(b),
 		d=as.double(d),
@@ -154,13 +155,14 @@ else {
 		p=as.double(p),
 		eps=as.double(eps),
 		inf=as.integer(2),
-		quadr=as.double(1),
+		envir2,
 		## DUP=FALSE,
 		PACKAGE="rmutil")
-		if(z2$inf==3||z2$inf==4)warning(paste("error",z2$inf,"- integration incomplete - try larger max"))
-		else if(z2$inf>4)stop(paste("error",z2$inf,"- incorrect arguments"))}
+		#.Call edit##if(z2$inf==3||z2$inf==4)warning(paste("error",z2$inf,"- integration incomplete - try larger max"))
+		#.Call edit##else if(z2$inf>4)stop(paste("error",z2$inf,"- incorrect arguments"))
+		}
 	# integrate either for both limits finite or with upper limit infinite
-	z1 <- .C("inthp",
+	z1 <- .Call("inthp_sexp",
 		a=as.double(a),
 		b=as.double(b),
 		d=as.double(d),
@@ -169,15 +171,22 @@ else {
 		p=as.double(p),
 		eps=as.double(eps),
 		inf=as.integer(inf),
-		quadr=as.double(1),
+		envir2,
 		## DUP=FALSE,
-		PACKAGE="rmutil")
-	if(z1$inf==3||z1$inf==4)warning(paste("error",z1$inf,"- integration incomplete - try larger max"))
-	else if(z1$inf>4)stop(paste("error",z1$inf,"- incorrect arguments"))
+		PACKAGE="rmutil") ## Bruce edits next two lines; just won't check.
+	#.Call edit##if(z1$inf==3||z1$inf==4)warning(paste("error",z1$inf,"- integration incomplete - try larger max"))
+	#.Call edit##else if(z1$inf>4)stop(paste("error",z1$inf,"- incorrect arguments"))
 	# if lower limit infinite, upper limit numeric, subtract upper
-	# part from that for whole real line
-	if(left)z1$quadr <- z1$quadr-z2$quadr
-	z1$quadr}}
+	# part from that for whole real line   ## Bruce comments; then include rewritten lines below
+	#.Call edit##if(left)z1$quadr <- z1$quadr-z2$quadr
+	#.Call edit##z1$quadr
+	# z1, z2 now contain the quadr object directly; we replaced with envir
+	if(left)z1 <- z1-z2
+	z1
+	}
+
+
+}
 ###
 ### vectorized two-dimensional integration
 ###
