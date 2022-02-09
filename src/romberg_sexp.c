@@ -127,7 +127,7 @@ static void evalRfn_sexp(SEXP fcn, double a[], double b[], int n, int len,
 
 
 SEXP romberg_sexp(SEXP fcn, SEXP a, SEXP b, SEXP len, SEXP eps,
-                  SEXP pts, SEXP max, int *err, SEXP envir)
+                  SEXP pts, SEXP max, SEXP err, SEXP envir)
 {
 
   int i, j, j1, finish;
@@ -136,6 +136,7 @@ SEXP romberg_sexp(SEXP fcn, SEXP a, SEXP b, SEXP len, SEXP eps,
   int *PTS = INTEGER(pts);
   int *MAX = INTEGER(max);
   int *LEN = INTEGER(len);
+  int *ERR = INTEGER(err);
   double *EPS = REAL(eps);
   double *A = REAL(a);
   double *B = REAL(b);
@@ -158,9 +159,9 @@ SEXP romberg_sexp(SEXP fcn, SEXP a, SEXP b, SEXP len, SEXP eps,
   Rf_protect(ans = Rf_allocVector(REALSXP, *LEN));
 
   if(!tab1||!tab2||!x||!fx||!sum||!tmpsum||!zz||!pnt1||!pnt2){
-    *err=1;
-    Rf_error("*err is now 1 -- Line 162 -- Unable to allocate memory in romberg integration C code");}
-  *err=0;
+    *ERR=1;
+    Rf_error("*ERR is now 1 -- Line 162 -- Unable to allocate memory in romberg integration C code");}
+  *ERR=0;
   for(i=0;i<*LEN;i++)x[i**MAX]=1.0;
 
   /* iterate, decreasing step size, until convergence or max number of steps */
@@ -173,8 +174,8 @@ SEXP romberg_sexp(SEXP fcn, SEXP a, SEXP b, SEXP len, SEXP eps,
     for(i=0;i<*LEN;i++){
       fx[j+i**MAX]=sum[i];
       if(j1>=*PTS){
-        interp_sexp(&x[j1-*PTS+i**MAX],&fx[j1-*PTS+i**MAX],*PTS,tab1,tab2,&sumlen[i],&errsum,err);
-        if(*err)Rf_error("*err is now 2 -- Line 177 -- Division by zero in romberg integration C code");
+        interp_sexp(&x[j1-*PTS+i**MAX],&fx[j1-*PTS+i**MAX],*PTS,tab1,tab2,&sumlen[i],&errsum,ERR);
+        if(*ERR)Rf_error("*ERR is now 2 -- Line 177 -- Division by zero in romberg integration C code");
         /*  check convergence  */
         if(fabs(errsum)>*EPS*fabs(sumlen[i]))finish=0;}
         /* decrease step size */
@@ -187,8 +188,8 @@ SEXP romberg_sexp(SEXP fcn, SEXP a, SEXP b, SEXP len, SEXP eps,
       for(i=0;i<*LEN;i++) REAL(ans)[i] = sumlen[i];
       Rf_unprotect(1);
       return ans;}}
-  *err=3;
-  if(*err)Rf_error("*err is now 3 -- Line 191 -- No convergence in romberg integration C code");
+  *ERR=3;
+  if(*ERR)Rf_error("*ERR is now 3 -- Line 191 -- No convergence in romberg integration C code");
   for(i=0;i<*LEN;i++) REAL(ans)[i] = sumlen[i];
   Rf_unprotect(1);
   return ans;}

@@ -1,6 +1,45 @@
 # rmutil R package
 Bruce Swihart  
-Jan 2022
+Feb 2022
+
+## Submission
+
+  * fixed typo in C code causing i386 error in rmutil::int()
+
+## Test environments
+Local OS X: R version 4.1.2 (2021-11-01)
+  * Platform: x86_64-apple-darwin17.0 (64-bit)
+  * Running under: macOS Mojave 10.14.6
+rhub::check(platform = "debian-clang-devel"): Debian Linux, R-devel, clang, ISO-8859-15 locale
+rhub::check(platform = "windows-x86_64-devel"): Windows Server 2022, R-devel, 64 bit
+macOS M1 Builder:  https://mac.r-project.org/macbuilder/results/1643902687-1f1f11645c6f0412/
+winbuilder     release (both i386 and x64): https://win-builder.r-project.org/OGgw8Hztae5H/examples_and_tests/ 
+winbuilder old release (both i386 and x64): https://win-builder.r-project.org/8e01HBk4klx0/examples_and_tests/
+
+## R CMD check results
+There were no ERRORs or WARNINGs or NOTEs.
+
+
+## Resubmission 1
+
+  * added Author information of TOMS614/INTHP
+  * fixed void / SEXP registration issue (LTO / valgrind additional issues)
+  * fixed 0-sized array warning 
+  * Fixed call_R Issue https://github.com/swihart/rmutil/issues/11
+  * Updated links to https: where appropriate
+
+## Test environments
+Local OS X: R version 4.1.2 (2021-11-01)
+  * Platform: x86_64-apple-darwin17.0 (64-bit)
+  * Running under: macOS Mojave 10.14.6
+rhub::check(platform = "debian-clang-devel"): Debian Linux, R-devel, clang, ISO-8859-15 locale
+rhub::check(platform = "windows-x86_64-devel"): Windows Server 2022, R-devel, 64 bit
+macOS M1 Builder: https://mac.r-project.org/macbuilder/results/1643749922-d94d516d70b8bd72/
+winbuilder: https://win-builder.r-project.org/A1nVi8ICq8rH/
+
+
+## R CMD check results
+There were no ERRORs or WARNINGs or NOTEs.
 
 ## Submission 1
 

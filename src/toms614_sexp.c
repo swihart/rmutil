@@ -49,7 +49,7 @@ static doublereal c_b12 = 0.;
   // static long length[1];
   // static void *args[1];
   static double zz[1];
-  double quadr[0];
+  double quadr[1];
   SEXP ans;
   Rf_protect(ans = Rf_allocVector(REALSXP, 1));
 

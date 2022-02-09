@@ -11,3 +11,4 @@ QEE2.out
 ^\.travis\.yml$
 cran-comments.md
 ^\.gitignore$
+^CRAN-SUBMISSION$
