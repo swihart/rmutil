@@ -1,10 +1,10 @@
 # rmutil R package
 Bruce Swihart  
-Feb 2022
+Mar 2022
 
 ## Submission
 
-  * fixed typo in C code causing i386 error in rmutil::int()
+  * I messed up when I took over as maintainer -- I'm resetting license to GPL>=2 as Lindsey originally had it.
 
 ## Test environments
 Local OS X: R version 4.1.2 (2021-11-01)
@@ -12,9 +12,9 @@ Local OS X: R version 4.1.2 (2021-11-01)
   * Running under: macOS Mojave 10.14.6
 rhub::check(platform = "debian-clang-devel"): Debian Linux, R-devel, clang, ISO-8859-15 locale
 rhub::check(platform = "windows-x86_64-devel"): Windows Server 2022, R-devel, 64 bit
-macOS M1 Builder:  https://mac.r-project.org/macbuilder/results/1643902687-1f1f11645c6f0412/
-winbuilder     release (both i386 and x64): https://win-builder.r-project.org/OGgw8Hztae5H/examples_and_tests/ 
-winbuilder old release (both i386 and x64): https://win-builder.r-project.org/8e01HBk4klx0/examples_and_tests/
+macOS M1 Builder 
+winbuilder     release (both i386 and x64) 
+winbuilder old release (both i386 and x64) 
 
 ## R CMD check results
 There were no ERRORs or WARNINGs or NOTEs.
