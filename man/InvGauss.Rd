@@ -20,7 +20,7 @@ The inverse Gaussian distribution has density
 \deqn{
 f(y) =
 \frac{1}{\sqrt{2\pi\sigma y^3}} e^{-(y-\mu)^2/(2 y \sigma \mu^2)}}{
-f(y) = 1/sqrt(2 pi s y^3) e^-((y - \mu)^2/(2 y s \mu^2))}
+f(y) = 1/sqrt(2 pi s y^3) e^-((y - m)^2/(2 y s m^2))}
 where \eqn{\mu}{m} is the mean of the distribution and
 \eqn{\sigma}{s} is the dispersion.
 }
