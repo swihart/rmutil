@@ -1,4 +1,29 @@
 # rmutil R package
+Bruce Swihart
+Oct 2022
+
+## resubmission 1
+
+  * fix clang15 warnings by specifying the arguments for pointer
+
+## submission
+
+  * fix clang15 warnings
+  * fix latex escape note
+  * fix version info from new.md note
+
+## Test environments
+Local OS X: R version 4.1.2 (2021-11-01)
+  * Platform: x86_64-apple-darwin17.0 (64-bit)
+  * Running under: macOS Mojave 10.14.6
+rhub::check(platform = "debian-clang-devel"): Debian Linux, R-devel, clang, ISO-8859-15 locale
+
+## R CMD check results
+There were no ERRORs or WARNINGs or NOTEs.
+
+
+
+# rmutil R package
 Bruce Swihart  
 Mar 2022
 
